@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { Search, CheckCircle, MessageSquare, Calendar } from 'lucide-react';
 
@@ -130,7 +129,7 @@ const SolutionSection: React.FC = () => {
           
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-saac-blue mb-2">4-15%</div>
-            <p className="text-gray-400">Taxa de conversão, com nossa ia integrada, garantimos resultados exponenciais</p>
+            <p className="text-gray-400">Taxa de conversão, com personalizações únicas</p>
           </div>
         </div>
       </div>
