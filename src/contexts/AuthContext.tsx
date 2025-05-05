@@ -9,6 +9,8 @@ type User = {
   company: string;
   role: string;
   avatar?: string;
+  isVerified?: boolean;
+  verificationStatus?: 'pending' | 'approved' | 'rejected';
 };
 
 type AuthContextType = {
@@ -21,6 +23,7 @@ type AuthContextType = {
   register: (name: string, email: string, password: string, company: string) => Promise<void>;
   logout: () => void;
   verify2FA: (code: string) => Promise<void>;
+  completeRegistration: (userData: Partial<User>) => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -63,7 +66,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         name: 'Usuário de Teste',
         email,
         company: 'SAAC',
-        role: 'Admin'
+        role: 'Admin',
+        isVerified: false,
+        verificationStatus: 'pending'
       };
       
       setUser(userData);
@@ -71,7 +76,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         localStorage.setItem('user', JSON.stringify(userData));
       }
       
-      navigate('/dashboard');
+      // Note: Not navigating yet - will be handled after 2FA
     } catch (error) {
       console.error('Login failed:', error);
       throw new Error('Credenciais inválidas. Por favor, tente novamente.');
@@ -93,13 +98,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email: `user@${provider}.com`,
         company: 'SAAC',
         role: 'User',
-        avatar: '/placeholder.svg'
+        avatar: '/placeholder.svg',
+        isVerified: false,
+        verificationStatus: 'pending'
       };
       
       setUser(userData);
       localStorage.setItem('user', JSON.stringify(userData));
       
-      navigate('/dashboard');
+      // Note: Not navigating yet - will be handled after 2FA
     } catch (error) {
       console.error(`SSO login with ${provider} failed:`, error);
       throw new Error(`Falha no login com ${provider}. Por favor, tente novamente.`);
@@ -120,14 +127,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         name,
         email,
         company,
-        role: 'User'
+        role: 'User',
+        isVerified: false,
+        verificationStatus: 'pending'
       };
       
       // After registration, usually we'd redirect to login,
       // but we'll auto-login for demo purposes
       setUser(userData);
       
-      navigate('/dashboard');
+      // Note: Not navigating yet - will wait for verification
     } catch (error) {
       console.error('Registration failed:', error);
       throw new Error('Falha no cadastro. Por favor, tente novamente.');
@@ -142,14 +151,52 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // This is a mock - would be replaced with a real 2FA verification
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      if (code !== '123456') {
+      const validTokens = ['123456', '4332', 'SAAC-2024'];
+      
+      if (!validTokens.includes(code)) {
         throw new Error('Código inválido');
       }
       
-      navigate('/dashboard');
+      // Update user with verified status
+      if (user) {
+        const updatedUser = {
+          ...user,
+          isVerified: true
+        };
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+      }
+      
+      // Note: Not navigating yet - will wait for registration completion
     } catch (error) {
       console.error('2FA verification failed:', error);
       throw new Error('Código de verificação inválido. Por favor, tente novamente.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const completeRegistration = async (userData: Partial<User>) => {
+    setIsLoading(true);
+    try {
+      // This is a mock - would be replaced with a real API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      if (user) {
+        const updatedUser = {
+          ...user,
+          ...userData,
+          verificationStatus: 'pending' as const
+        };
+        
+        setUser(updatedUser);
+        localStorage.setItem('user', JSON.stringify(updatedUser));
+      }
+      
+      navigate('/client-area');
+    } catch (error) {
+      console.error('Registration completion failed:', error);
+      throw new Error('Falha ao completar o cadastro. Por favor, tente novamente.');
     } finally {
       setIsLoading(false);
     }
@@ -172,7 +219,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loginWithSSO,
         register,
         logout,
-        verify2FA
+        verify2FA,
+        completeRegistration
       }}
     >
       {children}

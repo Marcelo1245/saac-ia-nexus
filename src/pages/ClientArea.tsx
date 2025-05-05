@@ -2,12 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import ProspectingFilters from '@/components/client/ProspectingFilters';
 import ConfettiEffect from '@/components/client/ConfettiEffect';
-import { Save, Download, Send } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Save, Download, Send, AlertCircle, Shield, Info, Mail, HelpCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { ProspectingFilters as ProspectingFiltersType } from '@/types/prospecting';
 

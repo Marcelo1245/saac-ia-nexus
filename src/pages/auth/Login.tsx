@@ -1,20 +1,33 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Shield, Lock, AlertTriangle } from 'lucide-react';
 import { toast } from 'sonner';
+import TokenVerification from './TokenVerification';
+import RegistrationForm from './RegistrationForm';
 
 const Login: React.FC = () => {
-  const { login, loginWithSSO, isLoading } = useAuth();
+  const { login, loginWithSSO, isLoading, verify2FA } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showTwoFactor, setShowTwoFactor] = useState(false);
+  const [showRegistration, setShowRegistration] = useState(false);
   const [twoFactorCode, setTwoFactorCode] = useState('');
+  const [loginAttempts, setLoginAttempts] = useState(0);
+  const [showCaptcha, setShowCaptcha] = useState(false);
+
+  useEffect(() => {
+    // Check if we should show captcha based on login attempts
+    if (loginAttempts >= 2) {
+      setShowCaptcha(true);
+    }
+  }, [loginAttempts]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -26,9 +39,9 @@ const Login: React.FC = () => {
     
     try {
       await login(email, password, rememberMe);
-      // For demo purposes, we'll show 2FA after successful login
       setShowTwoFactor(true);
     } catch (error) {
+      setLoginAttempts(prev => prev + 1);
       if (error instanceof Error) {
         toast.error(error.message);
       } else {
@@ -41,6 +54,7 @@ const Login: React.FC = () => {
     try {
       await loginWithSSO(provider);
     } catch (error) {
+      setLoginAttempts(prev => prev + 1);
       if (error instanceof Error) {
         toast.error(error.message);
       } else {
@@ -58,13 +72,8 @@ const Login: React.FC = () => {
     }
     
     try {
-      // In a real app, this would verify the code with the backend
-      if (twoFactorCode === '123456') {
-        toast.success('Verificação bem-sucedida!');
-        // Redirect would happen in the useAuth context
-      } else {
-        throw new Error('Código inválido.');
-      }
+      await verify2FA(twoFactorCode);
+      setShowRegistration(true);
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
@@ -74,54 +83,38 @@ const Login: React.FC = () => {
     }
   };
 
+  if (showRegistration) {
+    return <RegistrationForm />;
+  }
+
   if (showTwoFactor) {
-    return (
-      <div className="p-6">
-        <h2 className="text-xl font-semibold text-white mb-6">Verificação em Duas Etapas</h2>
-        <p className="text-gray-300 mb-4">
-          Por segurança, enviamos um código de 6 dígitos para o seu e-mail.
-        </p>
-        
-        <form onSubmit={handleVerify2FA}>
-          <div className="mb-4">
-            <Label htmlFor="twoFactorCode">Código de Verificação</Label>
-            <Input
-              id="twoFactorCode"
-              type="text"
-              placeholder="Digite o código de 6 dígitos"
-              value={twoFactorCode}
-              onChange={(e) => setTwoFactorCode(e.target.value)}
-              className="bg-gray-700"
-            />
-            <p className="text-xs text-gray-400 mt-1">
-              Para fins de demonstração, use o código: 123456
-            </p>
-          </div>
-          
-          <Button type="submit" className="w-full bg-saac-blue hover:bg-blue-700" disabled={isLoading}>
-            {isLoading ? 'Verificando...' : 'Verificar'}
-          </Button>
-        </form>
-      </div>
-    );
+    return <TokenVerification onVerify={handleVerify2FA} token={twoFactorCode} setToken={setTwoFactorCode} />;
   }
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-semibold text-white mb-6">Login</h2>
+      <div className="flex items-center justify-center mb-6">
+        <Shield className="text-saac-blue mr-2" size={24} />
+        <h2 className="text-xl font-semibold text-white">Área Segura de Clientes</h2>
+      </div>
       
       <form onSubmit={handleLogin}>
         <div className="space-y-4">
           <div>
             <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="seu@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="bg-gray-700"
-            />
+            <div className="relative">
+              <Input
+                id="email"
+                type="email"
+                placeholder="seu@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-gray-700 pl-10"
+              />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Lock className="h-4 w-4 text-gray-400" />
+              </div>
+            </div>
           </div>
           
           <div>
@@ -131,15 +124,35 @@ const Login: React.FC = () => {
                 Esqueceu a senha?
               </Link>
             </div>
-            <Input
-              id="password"
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="bg-gray-700"
-            />
+            <div className="relative">
+              <Input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-gray-700 pl-10"
+              />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <Lock className="h-4 w-4 text-gray-400" />
+              </div>
+            </div>
           </div>
+          
+          {showCaptcha && (
+            <div className="p-4 bg-gray-700 rounded-md">
+              <div className="flex items-center mb-2">
+                <AlertTriangle className="h-4 w-4 text-yellow-400 mr-2" />
+                <span className="text-sm text-yellow-400">Verificação adicional necessária</span>
+              </div>
+              <div className="flex items-center justify-center p-2 bg-gray-800 rounded">
+                <span className="text-sm text-gray-400">Captcha seria exibido aqui</span>
+              </div>
+              <p className="text-xs text-gray-400 mt-2">
+                Medida de segurança após múltiplas tentativas de login
+              </p>
+            </div>
+          )}
           
           <div className="flex items-center space-x-2">
             <Checkbox
@@ -151,7 +164,7 @@ const Login: React.FC = () => {
           </div>
           
           <Button type="submit" className="w-full bg-saac-blue hover:bg-blue-700" disabled={isLoading}>
-            {isLoading ? 'Entrando...' : 'Entrar'}
+            {isLoading ? 'Entrando...' : 'Acessar'}
           </Button>
         </div>
       </form>
@@ -192,6 +205,13 @@ const Login: React.FC = () => {
           Registre-se
         </Link>
       </p>
+
+      <div className="mt-4 pt-4 border-t border-gray-700">
+        <div className="flex items-center justify-center text-xs text-gray-400">
+          <Shield className="h-3 w-3 mr-1 text-green-400" />
+          <span>Área segura com criptografia SSL</span>
+        </div>
+      </div>
     </div>
   );
 };
