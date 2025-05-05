@@ -33,7 +33,17 @@ import { IndustrySelector } from '@/components/campaign/IndustrySelector';
 import { CompanySizeSelector } from '@/components/campaign/CompanySizeSelector';
 import { HierarchyLevelSelector } from '@/components/campaign/HierarchyLevelSelector';
 import { FunctionalRoleSelector } from '@/components/campaign/FunctionalRoleSelector';
-import { ProspectingFilters } from '@/types/prospecting';
+import { 
+  ProspectingFilters, 
+  CompanySize, 
+  HierarchyLevel, 
+  FunctionalRole, 
+  RecentActivity, 
+  Interaction, 
+  TechStack, 
+  AnnualRevenue,
+  Industry 
+} from '@/types/prospecting';
 import { toast } from 'sonner';
 
 const SegmentationFilters: React.FC = () => {
@@ -53,38 +63,50 @@ const SegmentationFilters: React.FC = () => {
   const [estimatedLeads, setEstimatedLeads] = useState(750);
 
   const handleIndustriesChange = (selected: string[]) => {
-    setFilters(prev => ({ ...prev, industries: selected }));
+    setFilters(prev => ({ 
+      ...prev, 
+      industries: selected as Industry[] 
+    }));
     updateEstimate();
   };
 
   const handleCompanySizesChange = (selected: string[]) => {
-    setFilters(prev => ({ ...prev, companySizes: selected }));
+    setFilters(prev => ({ 
+      ...prev, 
+      companySizes: selected as CompanySize[] 
+    }));
     updateEstimate();
   };
 
   const handleHierarchyLevelsChange = (selected: string[]) => {
-    setFilters(prev => ({ ...prev, hierarchyLevels: selected }));
+    setFilters(prev => ({ 
+      ...prev, 
+      hierarchyLevels: selected as HierarchyLevel[] 
+    }));
     updateEstimate();
   };
 
   const handleFunctionalRolesChange = (selected: string[]) => {
-    setFilters(prev => ({ ...prev, functionalRoles: selected }));
+    setFilters(prev => ({ 
+      ...prev, 
+      functionalRoles: selected as FunctionalRole[] 
+    }));
     updateEstimate();
   };
 
   const handleAddTechStack = (tech: string) => {
     if (!tech) return;
     const currentTechs = filters.techStacks || [];
-    if (!currentTechs.includes(tech)) {
+    if (!currentTechs.includes(tech as TechStack)) {
       setFilters(prev => ({ 
         ...prev, 
-        techStacks: [...currentTechs, tech]
+        techStacks: [...currentTechs, tech as TechStack]
       }));
       updateEstimate();
     }
   };
 
-  const handleRemoveTechStack = (tech: string) => {
+  const handleRemoveTechStack = (tech: TechStack) => {
     const currentTechs = filters.techStacks || [];
     setFilters(prev => ({ 
       ...prev, 
@@ -96,16 +118,16 @@ const SegmentationFilters: React.FC = () => {
   const handleAddRecentActivity = (activity: string) => {
     if (!activity) return;
     const currentActivities = filters.recentActivities || [];
-    if (!currentActivities.includes(activity)) {
+    if (!currentActivities.includes(activity as RecentActivity)) {
       setFilters(prev => ({ 
         ...prev, 
-        recentActivities: [...currentActivities, activity]
+        recentActivities: [...currentActivities, activity as RecentActivity]
       }));
       updateEstimate();
     }
   };
 
-  const handleRemoveRecentActivity = (activity: string) => {
+  const handleRemoveRecentActivity = (activity: RecentActivity) => {
     const currentActivities = filters.recentActivities || [];
     setFilters(prev => ({ 
       ...prev, 
@@ -117,16 +139,16 @@ const SegmentationFilters: React.FC = () => {
   const handleAddInteraction = (interaction: string) => {
     if (!interaction) return;
     const currentInteractions = filters.interactions || [];
-    if (!currentInteractions.includes(interaction)) {
+    if (!currentInteractions.includes(interaction as Interaction)) {
       setFilters(prev => ({ 
         ...prev, 
-        interactions: [...currentInteractions, interaction]
+        interactions: [...currentInteractions, interaction as Interaction]
       }));
       updateEstimate();
     }
   };
 
-  const handleRemoveInteraction = (interaction: string) => {
+  const handleRemoveInteraction = (interaction: Interaction) => {
     const currentInteractions = filters.interactions || [];
     setFilters(prev => ({ 
       ...prev, 
@@ -174,6 +196,45 @@ const SegmentationFilters: React.FC = () => {
     }, 2000);
   };
 
+  // Array para os tipos de receita anual com typecasting seguro
+  const revenueOptions: {id: AnnualRevenue; label: string}[] = [
+    {id: '<$1M', label: '<$1M'},
+    {id: '$1M-$10M', label: '$1M-$10M'},
+    {id: '$10M-$50M', label: '$10M-$50M'},
+    {id: '>$50M', label: '>$50M'}
+  ];
+
+  // Lista de atividades recentes com typecasting seguro
+  const recentActivityOptions: {id: RecentActivity; label: string}[] = [
+    {id: 'Postou conteúdo', label: 'Postou conteúdo'},
+    {id: 'Mudou de cargo', label: 'Mudou de cargo'},
+    {id: 'Contratou', label: 'Contratou'},
+    {id: 'Promovido', label: 'Promovido', value: 'Promovido' as RecentActivity},
+    {id: 'Aniversário de empresa', label: 'Aniversário de empresa', value: 'Aniversário de empresa' as RecentActivity}
+  ];
+
+  // Lista de interações com typecasting seguro
+  const interactionOptions: {id: Interaction; label: string}[] = [
+    {id: 'Visitou website', label: 'Visitou website'},
+    {id: 'Download whitepaper', label: 'Download whitepaper'},
+    {id: 'Assistiu webinar', label: 'Assistiu webinar', value: 'Assistiu webinar' as Interaction},
+    {id: 'Participou de evento', label: 'Participou de evento', value: 'Participou de evento' as Interaction},
+    {id: 'Abriu e-mail', label: 'Abriu e-mail', value: 'Abriu e-mail' as Interaction},
+    {id: 'Clicou em anúncio', label: 'Clicou em anúncio', value: 'Clicou em anúncio' as Interaction}
+  ];
+
+  // Lista de tecnologias com typecasting seguro
+  const techStackOptions: {id: TechStack; label: string}[] = [
+    {id: 'Salesforce', label: 'Salesforce'},
+    {id: 'HubSpot', label: 'HubSpot'},
+    {id: 'Zapier', label: 'Zapier'},
+    {id: 'Marketo', label: 'Marketo', value: 'Marketo' as TechStack},
+    {id: 'Adobe', label: 'Adobe', value: 'Adobe' as TechStack},
+    {id: 'SAP', label: 'SAP', value: 'SAP' as TechStack},
+    {id: 'Oracle', label: 'Oracle', value: 'Oracle' as TechStack},
+    {id: 'Zendesk', label: 'Zendesk', value: 'Zendesk' as TechStack}
+  ];
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -215,31 +276,31 @@ const SegmentationFilters: React.FC = () => {
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-                      {['<$1M', '$1M-$10M', '$10M-$50M', '>$50M'].map((revenue) => (
+                      {revenueOptions.map((revenue) => (
                         <button
-                          key={revenue}
+                          key={revenue.id}
                           onClick={() => {
                             const currentRevenues = filters.annualRevenues || [];
-                            if (currentRevenues.includes(revenue)) {
+                            if (currentRevenues.includes(revenue.id)) {
                               setFilters(prev => ({
                                 ...prev,
-                                annualRevenues: currentRevenues.filter(r => r !== revenue)
+                                annualRevenues: currentRevenues.filter(r => r !== revenue.id)
                               }));
                             } else {
                               setFilters(prev => ({
                                 ...prev,
-                                annualRevenues: [...currentRevenues, revenue]
+                                annualRevenues: [...currentRevenues, revenue.id]
                               }));
                             }
                             updateEstimate();
                           }}
                           className={`px-3 py-2 rounded-md text-sm transition-colors ${
-                            (filters.annualRevenues || []).includes(revenue)
+                            (filters.annualRevenues || []).includes(revenue.id)
                               ? 'bg-saac-blue text-white'
                               : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                           }`}
                         >
-                          {revenue}
+                          {revenue.label}
                         </button>
                       ))}
                     </div>
@@ -300,13 +361,13 @@ const SegmentationFilters: React.FC = () => {
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-                      {['Postou conteúdo', 'Mudou de cargo', 'Contratou', 'Promovido', 'Aniversário de empresa'].map(activity => (
+                      {recentActivityOptions.map(activity => (
                         <button
-                          key={activity}
-                          onClick={() => handleAddRecentActivity(activity)}
+                          key={activity.id}
+                          onClick={() => handleAddRecentActivity(activity.id)}
                           className="px-3 py-2 rounded-md text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors"
                         >
-                          {activity}
+                          {activity.label}
                         </button>
                       ))}
                     </div>
@@ -343,13 +404,13 @@ const SegmentationFilters: React.FC = () => {
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                      {['Visitou website', 'Download whitepaper', 'Assistiu webinar', 'Participou de evento', 'Abriu e-mail', 'Clicou em anúncio'].map(interaction => (
+                      {interactionOptions.map(interaction => (
                         <button
-                          key={interaction}
-                          onClick={() => handleAddInteraction(interaction)}
+                          key={interaction.id}
+                          onClick={() => handleAddInteraction(interaction.id)}
                           className="px-3 py-2 rounded-md text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors"
                         >
-                          {interaction}
+                          {interaction.label}
                         </button>
                       ))}
                     </div>
@@ -393,13 +454,13 @@ const SegmentationFilters: React.FC = () => {
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-                      {['Salesforce', 'HubSpot', 'Zapier', 'Marketo', 'Adobe', 'SAP', 'Oracle', 'Zendesk'].map(tech => (
+                      {techStackOptions.map(tech => (
                         <button
-                          key={tech}
-                          onClick={() => handleAddTechStack(tech)}
+                          key={tech.id}
+                          onClick={() => handleAddTechStack(tech.id)}
                           className="px-3 py-2 rounded-md text-sm bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors"
                         >
-                          {tech}
+                          {tech.label}
                         </button>
                       ))}
                     </div>
