@@ -119,18 +119,18 @@ const SolutionSection: React.FC = () => {
           </div>
           
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-saac-blue mb-2">100+</div>
-            <p className="text-gray-400">Leads processados diariamente</p>
+            <div className="text-4xl md:text-5xl font-bold text-saac-blue mb-2">100%</div>
+            <p className="text-gray-400">Automatizado, sem necessidade de trabalho manual</p>
           </div>
           
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-saac-blue mb-2">85%</div>
-            <p className="text-gray-400">Taxa média de personalização</p>
+            <div className="text-4xl md:text-5xl font-bold text-saac-blue mb-2">0%</div>
+            <p className="text-gray-400">Bounce rate, e reembolsamos lead's não qualificadas</p>
           </div>
           
           <div className="text-center">
-            <div className="text-4xl md:text-5xl font-bold text-saac-blue mb-2">3x</div>
-            <p className="text-gray-400">Aumento na conversão de reuniões</p>
+            <div className="text-4xl md:text-5xl font-bold text-saac-blue mb-2">4-15%</div>
+            <p className="text-gray-400">Taxa de conversão, com nossa ia integrada, garantimos resultados exponenciais</p>
           </div>
         </div>
       </div>
