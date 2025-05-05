@@ -6,8 +6,17 @@ import { useAuth } from '@/contexts/AuthContext';
 const AuthLayout: React.FC = () => {
   const { isAuthenticated, isInitialized } = useAuth();
 
+  // Show a loading state if auth is not initialized yet
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen bg-saac-dark flex items-center justify-center p-4">
+        <div className="text-gray-400">Carregando...</div>
+      </div>
+    );
+  }
+
   // Redirect to dashboard if already authenticated
-  if (isInitialized && isAuthenticated) {
+  if (isAuthenticated) {
     return <Navigate to="/dashboard" replace />;
   }
 
