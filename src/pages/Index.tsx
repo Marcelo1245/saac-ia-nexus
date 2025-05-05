@@ -11,13 +11,19 @@ import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, User } from 'lucide-react';
 
 const Index = () => {
   return (
     <div className="min-h-screen dark bg-saac-dark">
       <Navbar />
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-2 md:flex-row">
+        <Link to="/client-area">
+          <Button className="bg-gray-800 hover:bg-gray-700 shadow-lg w-full" size="lg">
+            <User className="mr-2 h-4 w-4" />
+            Área do Cliente
+          </Button>
+        </Link>
         <Link to="/auth/login">
           <Button className="bg-saac-blue hover:bg-blue-700 shadow-lg" size="lg">
             <LayoutDashboard className="mr-2 h-4 w-4" />

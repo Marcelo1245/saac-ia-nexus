@@ -1,7 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -64,6 +65,12 @@ const Navbar: React.FC = () => {
           <a onClick={() => scrollToSection('blog')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Blog
           </a>
+          <Link to="/client-area" className="text-gray-300 hover:text-saac-blue transition-colors">
+            <span className="flex items-center">
+              <User size={16} className="mr-1" />
+              Área do Cliente
+            </span>
+          </Link>
           <Button 
             onClick={() => scrollToSection('contact')} 
             className="bg-gradient-blue hover:opacity-90 text-white shadow-lg" 
@@ -105,6 +112,12 @@ const Navbar: React.FC = () => {
           <a onClick={() => scrollToSection('blog')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer">
             Blog
           </a>
+          <Link to="/client-area" className="text-gray-300 hover:text-saac-blue py-2">
+            <span className="flex items-center">
+              <User size={16} className="mr-1" />
+              Área do Cliente
+            </span>
+          </Link>
           <Button 
             onClick={() => scrollToSection('contact')} 
             className="bg-gradient-blue hover:opacity-90 text-white w-full"
