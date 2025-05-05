@@ -42,28 +42,28 @@ const ResultsSection: React.FC = () => {
   
   const metrics = [
     {
-      icon: Clock,
-      value: '24/7',
-      label: 'Operação contínua, sem interrupções',
-      description: 'Nossa plataforma trabalha ininterruptamente para maximizar suas oportunidades de negócio.'
+      icon: Search,
+      value: '3x',
+      label: 'mais leads qualificados',
+      description: 'Aumento na quantidade de leads qualificados em comparação com métodos tradicionais.'
     },
     {
       icon: CheckCircle,
-      value: '100%',
-      label: 'Automatizado, sem necessidade de trabalho manual',
-      description: 'Processo totalmente automatizado que elimina a necessidade de intervenção manual em suas prospecções.'
+      value: '45%',
+      label: 'taxa de conversão',
+      description: 'Taxa média de leads que aceitam agendar uma reunião com sua equipe de vendas.'
     },
     {
-      icon: Search,
-      value: '0%',
-      label: 'Bounce rate, e reembolsamos lead\'s não qualificadas',
-      description: 'Garantimos a qualidade dos leads gerados com nossa política de reembolso para leads não qualificados.'
+      icon: Clock,
+      value: '85%',
+      label: 'economia de tempo',
+      description: 'Redução no tempo que sua equipe gasta em tarefas de prospecção manual.'
     },
     {
       icon: TrendingUp,
-      value: '4-15%',
-      label: 'Taxa de conversão, com nossa ia integrada',
-      description: 'Garantimos resultados exponenciais com nossa inteligência artificial avançada integrada ao seu processo de vendas.'
+      value: '4.5x',
+      label: 'ROI médio',
+      description: 'Retorno médio sobre o investimento nos primeiros seis meses de implementação.'
     }
   ];
 

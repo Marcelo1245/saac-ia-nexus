@@ -56,7 +56,7 @@ const HeroSection: React.FC = () => {
                 className="bg-gradient-blue hover:opacity-90 text-white shadow-lg py-6 px-8 rounded-md"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Agendar Demonstração
+                Solicitar Demo
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               
