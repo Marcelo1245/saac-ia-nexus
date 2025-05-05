@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { ArrowRight, Pause, Play, ChevronRight, ChevronLeft } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -202,23 +201,13 @@ const HowItWorksSection: React.FC = () => {
             isVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Timeline line */}
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-700 transform -translate-y-1/2"></div>
+          {/* Removed the timeline line that was here */}
           
-          {/* Animated progress bar */}
-          <div 
-            className="hidden md:block absolute top-1/2 left-0 h-0.5 bg-saac-blue transform -translate-y-1/2 transition-all duration-500"
-            style={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
-          ></div>
+          {/* Removed the animated progress bar that was here */}
           
-          {/* Mobile timeline line */}
-          <div className="md:hidden absolute top-0 bottom-0 left-4 w-0.5 bg-gray-700"></div>
+          {/* Mobile timeline line - also removed */}
           
-          {/* Mobile animated progress bar */}
-          <div 
-            className="md:hidden absolute top-0 left-4 w-0.5 bg-saac-blue transition-all duration-500"
-            style={{ height: `${((activeStep + 1) / steps.length) * 100}%` }}
-          ></div>
+          {/* Mobile animated progress bar - also removed */}
           
           <div className="flex flex-col md:flex-row">
             {steps.map((step, index) => (
