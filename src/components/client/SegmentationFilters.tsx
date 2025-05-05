@@ -1,50 +1,19 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { 
-  Card, 
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-  CardDescription 
-} from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from '@/components/ui/accordion';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Slider } from '@/components/ui/slider';
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Switch } from '@/components/ui/switch';
 import { Input } from '@/components/ui/input';
 import { IndustrySelector } from '@/components/campaign/IndustrySelector';
 import { CompanySizeSelector } from '@/components/campaign/CompanySizeSelector';
 import { HierarchyLevelSelector } from '@/components/campaign/HierarchyLevelSelector';
 import { FunctionalRoleSelector } from '@/components/campaign/FunctionalRoleSelector';
-import { 
-  ProspectingFilters, 
-  CompanySize, 
-  HierarchyLevel, 
-  FunctionalRole, 
-  RecentActivity, 
-  Interaction, 
-  TechStack, 
-  AnnualRevenue,
-  Industry 
-} from '@/types/prospecting';
+import { ProspectingFilters, CompanySize, HierarchyLevel, FunctionalRole, RecentActivity, Interaction, TechStack, AnnualRevenue, Industry } from '@/types/prospecting';
 import { toast } from 'sonner';
+import { Filter, Building, Globe, Users, BriefCase } from 'lucide-react';
 
 const SegmentationFilters: React.FC = () => {
   const [filters, setFilters] = useState<Partial<ProspectingFilters>>({
@@ -188,11 +157,11 @@ const SegmentationFilters: React.FC = () => {
     }
 
     // Aqui você salvaria a campanha no banco de dados
-    toast.success("Campanha salva com sucesso!");
+    toast.success("Campanha enviada à nossa equipe com sucesso!");
     
-    // Simulação de redirecionamento para dashboard com nova campanha
+    // Simulação de confirmação
     setTimeout(() => {
-      toast.info("Sua campanha está sendo processada. Em breve você receberá os primeiros leads.");
+      toast.info("Nossa equipe entrará em contato com você para os próximos passos.");
     }, 2000);
   };
 
@@ -209,18 +178,19 @@ const SegmentationFilters: React.FC = () => {
     {id: 'Postou conteúdo', label: 'Postou conteúdo'},
     {id: 'Mudou de cargo', label: 'Mudou de cargo'},
     {id: 'Contratou', label: 'Contratou'},
-    {id: 'Promovido', label: 'Promovido', value: 'Promovido' as RecentActivity},
-    {id: 'Aniversário de empresa', label: 'Aniversário de empresa', value: 'Aniversário de empresa' as RecentActivity}
+    // Adicionando mais opções como extensões do tipo
+    {id: 'Promovido' as RecentActivity, label: 'Promovido'},
+    {id: 'Aniversário de empresa' as RecentActivity, label: 'Aniversário de empresa'}
   ];
 
   // Lista de interações com typecasting seguro
   const interactionOptions: {id: Interaction; label: string}[] = [
     {id: 'Visitou website', label: 'Visitou website'},
     {id: 'Download whitepaper', label: 'Download whitepaper'},
-    {id: 'Assistiu webinar', label: 'Assistiu webinar', value: 'Assistiu webinar' as Interaction},
-    {id: 'Participou de evento', label: 'Participou de evento', value: 'Participou de evento' as Interaction},
-    {id: 'Abriu e-mail', label: 'Abriu e-mail', value: 'Abriu e-mail' as Interaction},
-    {id: 'Clicou em anúncio', label: 'Clicou em anúncio', value: 'Clicou em anúncio' as Interaction}
+    {id: 'Assistiu webinar' as Interaction, label: 'Assistiu webinar'},
+    {id: 'Participou de evento' as Interaction, label: 'Participou de evento'},
+    {id: 'Abriu e-mail' as Interaction, label: 'Abriu e-mail'},
+    {id: 'Clicou em anúncio' as Interaction, label: 'Clicou em anúncio'}
   ];
 
   // Lista de tecnologias com typecasting seguro
@@ -228,11 +198,11 @@ const SegmentationFilters: React.FC = () => {
     {id: 'Salesforce', label: 'Salesforce'},
     {id: 'HubSpot', label: 'HubSpot'},
     {id: 'Zapier', label: 'Zapier'},
-    {id: 'Marketo', label: 'Marketo', value: 'Marketo' as TechStack},
-    {id: 'Adobe', label: 'Adobe', value: 'Adobe' as TechStack},
-    {id: 'SAP', label: 'SAP', value: 'SAP' as TechStack},
-    {id: 'Oracle', label: 'Oracle', value: 'Oracle' as TechStack},
-    {id: 'Zendesk', label: 'Zendesk', value: 'Zendesk' as TechStack}
+    {id: 'Marketo' as TechStack, label: 'Marketo'},
+    {id: 'Adobe' as TechStack, label: 'Adobe'},
+    {id: 'SAP' as TechStack, label: 'SAP'},
+    {id: 'Oracle' as TechStack, label: 'Oracle'},
+    {id: 'Zendesk' as TechStack, label: 'Zendesk'}
   ];
 
   return (
@@ -254,7 +224,10 @@ const SegmentationFilters: React.FC = () => {
             <Accordion type="multiple" defaultValue={['demographics', 'contacts']} className="w-full">
               <AccordionItem value="demographics" className="border-gray-700">
                 <AccordionTrigger className="text-white hover:no-underline">
-                  Dados Demográficos da Empresa
+                  <span className="flex items-center">
+                    <Building className="mr-2 h-4 w-4" />
+                    Dados Demográficos da Empresa
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent className="space-y-6 pt-4">
                   <IndustrySelector 
@@ -310,7 +283,10 @@ const SegmentationFilters: React.FC = () => {
               
               <AccordionItem value="contacts" className="border-gray-700">
                 <AccordionTrigger className="text-white hover:no-underline">
-                  Filtros de Contato
+                  <span className="flex items-center">
+                    <Users className="mr-2 h-4 w-4" />
+                    Filtros de Contato
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent className="space-y-6 pt-4">
                   <HierarchyLevelSelector 
@@ -327,7 +303,10 @@ const SegmentationFilters: React.FC = () => {
               
               <AccordionItem value="engagement" className="border-gray-700">
                 <AccordionTrigger className="text-white hover:no-underline">
-                  Critérios de Engajamento
+                  <span className="flex items-center">
+                    <Filter className="mr-2 h-4 w-4" />
+                    Critérios de Engajamento
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent className="space-y-6 pt-4">
                   <div className="space-y-3">
@@ -420,7 +399,10 @@ const SegmentationFilters: React.FC = () => {
               
               <AccordionItem value="technographics" className="border-gray-700">
                 <AccordionTrigger className="text-white hover:no-underline">
-                  Tecnologias Utilizadas (Technographics)
+                  <span className="flex items-center">
+                    <Globe className="mr-2 h-4 w-4" />
+                    Tecnologias Utilizadas (Technographics)
+                  </span>
                 </AccordionTrigger>
                 <AccordionContent className="space-y-6 pt-4">
                   <div className="space-y-3">
@@ -556,7 +538,7 @@ const SegmentationFilters: React.FC = () => {
                 className="w-full bg-saac-blue hover:bg-blue-700"
                 onClick={handleSaveCampaign}
               >
-                Salvar e Iniciar Campanha
+                Enviar Segmentação para Equipe
               </Button>
             </CardFooter>
           </Card>

@@ -1,13 +1,13 @@
 
 export type CompanySize = '1-10' | '11-50' | '51-200' | '201-500' | '501+';
 export type AnnualRevenue = '<$1M' | '$1M-$10M' | '$10M-$50M' | '>$50M';
-export type Industry = 'SaaS' | 'E-commerce' | 'Fintech' | string;
-export type HierarchyLevel = 'C-Level' | 'VP/Diretor' | 'Gerente';
-export type FunctionalRole = 'Marketing' | 'Vendas' | 'TI' | string;
+export type Industry = 'SaaS' | 'E-commerce' | 'Fintech' | 'Health' | 'Education' | 'Retail' | 'Manufacturing' | 'Professional' | 'Technology' | 'Media' | string;
+export type HierarchyLevel = 'C-Level' | 'VP/Diretor' | 'Gerente' | string;
+export type FunctionalRole = 'Marketing' | 'Vendas' | 'TI' | 'Operações' | 'Finanças' | 'RH' | 'Produto' | 'Jurídico' | string;
 
-export type RecentActivity = 'Postou conteúdo' | 'Mudou de cargo' | 'Contratou';
-export type Interaction = 'Visitou website' | 'Download whitepaper' | string;
-export type TechStack = 'Salesforce' | 'HubSpot' | 'Zapier' | string;
+export type RecentActivity = 'Postou conteúdo' | 'Mudou de cargo' | 'Contratou' | 'Promovido' | 'Aniversário de empresa' | string;
+export type Interaction = 'Visitou website' | 'Download whitepaper' | 'Assistiu webinar' | 'Participou de evento' | 'Abriu e-mail' | 'Clicou em anúncio' | string;
+export type TechStack = 'Salesforce' | 'HubSpot' | 'Zapier' | 'Marketo' | 'Adobe' | 'SAP' | 'Oracle' | 'Zendesk' | string;
 
 export interface ProspectingFilters {
   // Dados Demográficos
