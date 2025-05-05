@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -13,7 +12,7 @@ import { HierarchyLevelSelector } from '@/components/campaign/HierarchyLevelSele
 import { FunctionalRoleSelector } from '@/components/campaign/FunctionalRoleSelector';
 import { ProspectingFilters, CompanySize, HierarchyLevel, FunctionalRole, RecentActivity, Interaction, TechStack, AnnualRevenue, Industry } from '@/types/prospecting';
 import { toast } from 'sonner';
-import { Filter, Building, Globe, Users, BriefCase } from 'lucide-react';
+import { Filter, Building, Globe, Users, Briefcase } from 'lucide-react';
 
 const SegmentationFilters: React.FC = () => {
   const [filters, setFilters] = useState<Partial<ProspectingFilters>>({
