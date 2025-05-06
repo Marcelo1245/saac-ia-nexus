@@ -282,7 +282,7 @@ const HowItWorksSection: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-6 md:mb-0 md:pr-8">
               <h3 className="text-2xl font-semibold text-white mb-4">
-                Fábrica Inteligente de Leads
+                Sistema de conversão inteligente
               </h3>
               <p className="text-gray-300 mb-6">
                 Nossa demonstração interativa mostra como a plataforma funciona na prática, capturando, qualificando e agendando reuniões automaticamente, como uma linha de produção inteligente que opera 24/7.
@@ -341,18 +341,22 @@ const HowItWorksSection: React.FC = () => {
                 </div>
                 
                 {/* Digital measurements and data visualization */}
-                <div className="mt-2 grid grid-cols-3 gap-2">
+                <div className="mt-2 grid grid-cols-4 gap-2">
                   <div className="bg-gray-800/70 p-2 rounded text-center">
                     <div className="text-xs text-gray-400">Eficiência</div>
-                    <div className="text-saac-neon text-sm font-mono">98.7%</div>
+                    <div className="text-saac-neon text-sm font-mono">100%</div>
                   </div>
                   <div className="bg-gray-800/70 p-2 rounded text-center">
                     <div className="text-xs text-gray-400">Leads/Dia</div>
-                    <div className="text-saac-neon text-sm font-mono">324</div>
+                    <div className="text-saac-neon text-sm font-mono">40</div>
                   </div>
                   <div className="bg-gray-800/70 p-2 rounded text-center">
                     <div className="text-xs text-gray-400">Conversão</div>
-                    <div className="text-saac-neon text-sm font-mono">28.5%</div>
+                    <div className="text-saac-neon text-sm font-mono">10.7%</div>
+                  </div>
+                  <div className="bg-gray-800/70 p-2 rounded text-center">
+                    <div className="text-xs text-gray-400">Leads/total</div>
+                    <div className="text-saac-neon text-sm font-mono">1000</div>
                   </div>
                 </div>
               </div>

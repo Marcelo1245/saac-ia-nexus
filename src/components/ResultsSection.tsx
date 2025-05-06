@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Clock, CheckCircle, Search } from 'lucide-react';
@@ -49,13 +48,13 @@ const ResultsSection: React.FC = () => {
     },
     {
       icon: CheckCircle,
-      value: '45%',
+      value: '4-15%',
       label: 'taxa de conversão',
       description: 'Taxa média de leads que aceitam agendar uma reunião com sua equipe de vendas.'
     },
     {
       icon: Clock,
-      value: '85%',
+      value: '100%',
       label: 'economia de tempo',
       description: 'Redução no tempo que sua equipe gasta em tarefas de prospecção manual.'
     },
