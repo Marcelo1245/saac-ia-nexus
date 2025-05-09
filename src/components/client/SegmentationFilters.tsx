@@ -221,6 +221,18 @@ const SegmentationFilters: React.FC = () => {
     updateEstimate();
   };
 
+  // Add this helper function somewhere in the file, before it's used:
+  const ensureArrayLength = (value: any): number => {
+    if (Array.isArray(value)) return value.length;
+    return 0;
+  };
+
+  // Then modify line 153 and other similar checks to use this helper:
+  // Replace instances like:
+  // (filters.industries?.length || 0)
+  // With:
+  // ensureArrayLength(filters.industries)
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

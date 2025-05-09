@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -13,12 +12,14 @@ import { HierarchyLevelSelector } from '@/components/campaign/HierarchyLevelSele
 import { FunctionalRoleSelector } from '@/components/campaign/FunctionalRoleSelector';
 import { PredictedResults } from '@/components/campaign/PredictedResults';
 
-// Dados simulados
+// Fix the mock data structure to conform to our updated CampaignTemplate interface
 const mockTemplates: CampaignTemplate[] = [
   {
     id: 'template1',
     name: 'Growth Hack SaaS B2B',
     description: 'Ideal para empresas de SaaS buscando crescimento rápido no mercado B2B',
+    filters: {},
+    createdAt: new Date().toISOString(),
     targetIndustries: ['SaaS', 'Fintech', 'E-commerce'],
     targetRoles: ['Marketing', 'Vendas'],
     presetFilters: {
@@ -38,6 +39,8 @@ const mockTemplates: CampaignTemplate[] = [
     id: 'template2',
     name: 'Expansão para Varejo',
     description: 'Estratégia focada em empresas de varejo buscando soluções tecnológicas',
+    filters: {},
+    createdAt: new Date().toISOString(),
     targetIndustries: ['E-commerce', 'Retail'],
     targetRoles: ['TI', 'Operações'],
     presetFilters: {

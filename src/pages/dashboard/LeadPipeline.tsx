@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Lead } from '@/types/prospecting';
@@ -45,6 +44,7 @@ import { KanbanBoard } from '@/components/leads/KanbanBoard';
 const mockLeads: Lead[] = [
   {
     id: '1',
+    name: 'Carlos Silva',
     firstName: 'Carlos',
     lastName: 'Silva',
     email: 'carlos.silva@techsoft.com',
@@ -61,6 +61,7 @@ const mockLeads: Lead[] = [
   },
   {
     id: '2',
+    name: 'Mariana Costa',
     firstName: 'Mariana',
     lastName: 'Costa',
     email: 'mariana.costa@ecommercego.com',
@@ -76,6 +77,7 @@ const mockLeads: Lead[] = [
   },
   {
     id: '3',
+    name: 'André Mendes',
     firstName: 'André',
     lastName: 'Mendes',
     email: 'andre.mendes@saassolutions.com',
@@ -92,6 +94,7 @@ const mockLeads: Lead[] = [
   },
   {
     id: '4',
+    name: 'Luiza Santos',
     firstName: 'Luiza',
     lastName: 'Santos',
     email: 'luiza.santos@fintechcapital.com',
@@ -107,6 +110,7 @@ const mockLeads: Lead[] = [
   },
   {
     id: '5',
+    name: 'Ricardo Oliveira',
     firstName: 'Ricardo',
     lastName: 'Oliveira',
     email: 'ricardo.oliveira@datainsights.com',
@@ -123,6 +127,7 @@ const mockLeads: Lead[] = [
   },
   {
     id: '6',
+    name: 'Juliana Pereira',
     firstName: 'Juliana',
     lastName: 'Pereira',
     email: 'juliana.pereira@retailtech.com',
@@ -138,6 +143,7 @@ const mockLeads: Lead[] = [
   },
   {
     id: '7',
+    name: 'Marcos Almeida',
     firstName: 'Marcos',
     lastName: 'Almeida',
     email: 'marcos.almeida@cloudservices.com',
@@ -153,6 +159,7 @@ const mockLeads: Lead[] = [
   },
   {
     id: '8',
+    name: 'Fernanda Lima',
     firstName: 'Fernanda',
     lastName: 'Lima',
     email: 'fernanda.lima@edutech.com',

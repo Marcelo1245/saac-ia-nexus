@@ -22,7 +22,12 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ leads }) => {
   
   leads.forEach(lead => {
     if (lead.status !== 'lost') {
-      leadsByStatus[lead.status].push(lead);
+      // Use optional chaining to safely access the status
+      const status = lead.status || 'new';
+      // Only add to known status categories
+      if (leadsByStatus[status]) {
+        leadsByStatus[status].push(lead);
+      }
     }
   });
   
@@ -33,6 +38,20 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ leads }) => {
     engaged: { title: 'Engajados', color: 'border-purple-500', bgColor: 'bg-purple-500/10' },
     qualified: { title: 'Qualificados', color: 'border-green-500', bgColor: 'bg-green-500/10' },
     converted: { title: 'Convertidos', color: 'border-saac-blue', bgColor: 'bg-saac-blue/10' }
+  };
+  
+  // Helper to safely get initials from a lead
+  const getInitials = (lead: Lead): string => {
+    if (lead.firstName && lead.lastName) {
+      return `${lead.firstName.charAt(0)}${lead.lastName.charAt(0)}`;
+    } else if (lead.name) {
+      const nameParts = lead.name.split(' ');
+      if (nameParts.length > 1) {
+        return `${nameParts[0].charAt(0)}${nameParts[1].charAt(0)}`;
+      }
+      return lead.name.charAt(0);
+    }
+    return 'LD'; // Default fallback
   };
   
   return (
@@ -58,18 +77,22 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ leads }) => {
                     <div className="flex items-center">
                       <Avatar className="h-8 w-8 mr-2">
                         <AvatarFallback className="bg-saac-blue text-white text-xs">
-                          {lead.firstName.charAt(0)}{lead.lastName.charAt(0)}
+                          {getInitials(lead)}
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <h4 className="font-medium text-white text-sm">{lead.firstName} {lead.lastName}</h4>
+                        <h4 className="font-medium text-white text-sm">
+                          {lead.firstName && lead.lastName ? 
+                            `${lead.firstName} ${lead.lastName}` : 
+                            lead.name}
+                        </h4>
                         <p className="text-gray-400 text-xs">{lead.position}</p>
                       </div>
                     </div>
                     <div 
                       className={`h-6 w-6 rounded-full flex items-center justify-center ${
-                        lead.score >= 80 ? 'bg-green-500/20 text-green-500' :
-                        lead.score >= 60 ? 'bg-yellow-500/20 text-yellow-500' :
+                        lead.score && lead.score >= 80 ? 'bg-green-500/20 text-green-500' :
+                        lead.score && lead.score >= 60 ? 'bg-yellow-500/20 text-yellow-500' :
                         'bg-gray-500/20 text-gray-400'
                       }`}
                     >
@@ -79,9 +102,11 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({ leads }) => {
                   
                   <div className="mb-3">
                     <p className="text-white text-sm font-medium">{lead.company}</p>
-                    <p className="text-gray-400 text-xs">
-                      {lead.industry} • {lead.companySize} funcionários
-                    </p>
+                    {lead.industry && lead.companySize && (
+                      <p className="text-gray-400 text-xs">
+                        {lead.industry} • {lead.companySize} funcionários
+                      </p>
+                    )}
                   </div>
                   
                   {lead.notes && (
