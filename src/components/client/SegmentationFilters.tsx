@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -25,6 +26,12 @@ const SegmentationFilters: React.FC = () => {
     interactions: [],
     techStacks: []
   });
+  
+  // Helper function to safely check array length
+  const ensureArrayLength = (value: any): number => {
+    if (Array.isArray(value)) return value.length;
+    return 0;
+  };
   
   const [campaignName, setCampaignName] = useState('');
   const [leadTarget, setLeadTarget] = useState<number[]>([100]);
@@ -132,10 +139,11 @@ const SegmentationFilters: React.FC = () => {
   const updateEstimate = () => {
     // Simulated estimate calculation
     const baseEstimate = 1000;
-    const industryFactor = Math.max(0.2, 1 - ((filters.industries?.length || 0) * 0.1));
-    const sizeFactor = Math.max(0.2, 1 - ((filters.companySizes?.length || 0) * 0.1));
-    const roleFactor = Math.max(0.2, 1 - ((filters.functionalRoles?.length || 0) * 0.1));
-    const levelFactor = Math.max(0.2, 1 - ((filters.hierarchyLevels?.length || 0) * 0.1));
+    // Use our ensureArrayLength helper to safely check array lengths
+    const industryFactor = Math.max(0.2, 1 - (ensureArrayLength(filters.industries) * 0.1));
+    const sizeFactor = Math.max(0.2, 1 - (ensureArrayLength(filters.companySizes) * 0.1));
+    const roleFactor = Math.max(0.2, 1 - (ensureArrayLength(filters.functionalRoles) * 0.1));
+    const levelFactor = Math.max(0.2, 1 - (ensureArrayLength(filters.hierarchyLevels) * 0.1));
     
     const newEstimate = Math.round(
       baseEstimate * industryFactor * sizeFactor * roleFactor * levelFactor
