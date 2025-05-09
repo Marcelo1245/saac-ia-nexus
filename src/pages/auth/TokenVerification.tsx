@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Shield, AlertCircle, CheckCircle, Loader } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -124,7 +123,7 @@ const TokenVerification: React.FC<TokenVerificationProps> = ({ onVerify, token, 
                 <Loader className="animate-spin text-saac-blue mr-2" size={16} />
                 <span className="text-sm text-gray-300">Verificando token...</span>
               </div>
-              <Progress value={progress} className="h-2" indicatorClassName="bg-saac-blue" />
+              <Progress value={progress} className="h-2" />
             </div>
           )}
           

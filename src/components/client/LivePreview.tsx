@@ -168,10 +168,13 @@ const LivePreview: React.FC<LivePreviewProps> = ({ filters, estimatedLeads }) =>
               {filters.customTags?.length ? (
                 <li>Tags personalizadas: {filters.customTags.length} selecionadas</li>
               ) : null}
+              {filters.annualRevenues?.length ? (
+                <li>Faixas de receita: {filters.annualRevenues.length} selecionadas</li>
+              ) : null}
             </ul>
           </div>
           
-          {Object.values(filters).every(arr => !arr || arr.length === 0) && (
+          {Object.values(filters).every(arr => !arr || Array.isArray(arr) && arr.length === 0) && (
             <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-md p-3 text-amber-700">
               <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
               <p className="text-xs">

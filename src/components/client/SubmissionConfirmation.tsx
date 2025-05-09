@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -46,7 +45,7 @@ const SubmissionConfirmation: React.FC<SubmissionConfirmationProps> = ({
         origin: { y: 0.7 }
       };
 
-      const fire = (particleRatio: number, opts: any) => {
+      const fire = (particleRatio: number, opts: confetti.Options) => {
         confetti({
           ...defaults,
           ...opts,
@@ -59,16 +58,19 @@ const SubmissionConfirmation: React.FC<SubmissionConfirmationProps> = ({
         startVelocity: 55,
         origin: { y: 0.7 }
       });
+
       fire(0.2, {
         spread: 60,
         origin: { y: 0.7 }
       });
+
       fire(0.35, {
         spread: 100,
         decay: 0.91,
         scalar: 0.8,
         origin: { y: 0.7 }
       });
+
       fire(0.1, {
         spread: 120,
         startVelocity: 25,
@@ -76,6 +78,7 @@ const SubmissionConfirmation: React.FC<SubmissionConfirmationProps> = ({
         scalar: 1.2,
         origin: { y: 0.7 }
       });
+
       fire(0.1, {
         spread: 120,
         startVelocity: 45,
@@ -93,7 +96,7 @@ const SubmissionConfirmation: React.FC<SubmissionConfirmationProps> = ({
         setLogs(prev => [...prev, terminalLogs[currentLogIndex]]);
         setCurrentLogIndex(currentLogIndex + 1);
       }, 800);
-
+      
       return () => clearTimeout(timer);
     } else if (!downloadTriggered) {
       // Auto-download the JSON file after all logs are displayed
@@ -101,7 +104,7 @@ const SubmissionConfirmation: React.FC<SubmissionConfirmationProps> = ({
         handleDownload();
         setDownloadTriggered(true);
       }, 1000);
-
+      
       return () => clearTimeout(timer);
     }
   }, [currentLogIndex, downloadTriggered, terminalLogs]);
@@ -118,7 +121,6 @@ const SubmissionConfirmation: React.FC<SubmissionConfirmationProps> = ({
 
     const dataStr = JSON.stringify(campaignData, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
-    
     const exportFileDefaultName = `${campaignName || 'saac-campaign'}-filtros.json`;
     
     const linkElement = document.createElement('a');

@@ -132,10 +132,10 @@ const SegmentationFilters: React.FC = () => {
   const updateEstimate = () => {
     // Simulated estimate calculation
     const baseEstimate = 1000;
-    const industryFactor = Math.max(0.2, 1 - (filters.industries?.length || 0) * 0.1);
-    const sizeFactor = Math.max(0.2, 1 - (filters.companySizes?.length || 0) * 0.1);
-    const roleFactor = Math.max(0.2, 1 - (filters.functionalRoles?.length || 0) * 0.1);
-    const levelFactor = Math.max(0.2, 1 - (filters.hierarchyLevels?.length || 0) * 0.1);
+    const industryFactor = Math.max(0.2, 1 - ((filters.industries?.length || 0) * 0.1));
+    const sizeFactor = Math.max(0.2, 1 - ((filters.companySizes?.length || 0) * 0.1));
+    const roleFactor = Math.max(0.2, 1 - ((filters.functionalRoles?.length || 0) * 0.1));
+    const levelFactor = Math.max(0.2, 1 - ((filters.hierarchyLevels?.length || 0) * 0.1));
     
     const newEstimate = Math.round(
       baseEstimate * industryFactor * sizeFactor * roleFactor * levelFactor
@@ -204,6 +204,23 @@ const SegmentationFilters: React.FC = () => {
     {id: 'Zendesk' as TechStack, label: 'Zendesk'}
   ];
 
+  const handleRevenueChange = (revenueId: AnnualRevenue) => {
+    const currentRevenues = filters.annualRevenues || [];
+    
+    if (currentRevenues.includes(revenueId)) {
+      setFilters(prev => ({
+        ...prev,
+        annualRevenues: currentRevenues.filter(r => r !== revenueId)
+      }));
+    } else {
+      setFilters(prev => ({
+        ...prev,
+        annualRevenues: [...currentRevenues, revenueId]
+      }));
+    }
+    updateEstimate();
+  };
+
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -251,21 +268,7 @@ const SegmentationFilters: React.FC = () => {
                       {revenueOptions.map((revenue) => (
                         <button
                           key={revenue.id}
-                          onClick={() => {
-                            const currentRevenues = filters.annualRevenues || [];
-                            if (currentRevenues.includes(revenue.id)) {
-                              setFilters(prev => ({
-                                ...prev,
-                                annualRevenues: currentRevenues.filter(r => r !== revenue.id)
-                              }));
-                            } else {
-                              setFilters(prev => ({
-                                ...prev,
-                                annualRevenues: [...currentRevenues, revenue.id]
-                              }));
-                            }
-                            updateEstimate();
-                          }}
+                          onClick={() => handleRevenueChange(revenue.id)}
                           className={`px-3 py-2 rounded-md text-sm transition-colors ${
                             (filters.annualRevenues || []).includes(revenue.id)
                               ? 'bg-saac-blue text-white'

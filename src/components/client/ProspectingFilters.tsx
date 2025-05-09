@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Label } from '@/components/ui/label';
@@ -26,6 +25,7 @@ const ProspectingFilters: React.FC<ProspectingFiltersProps> = ({
   initialFilters,
   initialCampaignName
 }) => {
+  // Fix the annualRevenues property
   const [filters, setFilters] = useState<Partial<ProspectingFiltersType>>(initialFilters || {
     industries: [],
     companySizes: [],

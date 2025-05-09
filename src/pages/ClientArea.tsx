@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
@@ -10,7 +9,7 @@ import LivePreview from '@/components/client/LivePreview';
 import SubmissionConfirmation from '@/components/client/SubmissionConfirmation';
 import ConfettiEffect from '@/components/client/ConfettiEffect';
 import { useAuth } from '@/contexts/AuthContext';
-import { Save, Download, Send, AlertCircle, Shield, Info, Mail, HelpCircle, Rocket } from 'lucide-react';
+import { Filter, Building, Globe, Users, Briefcase, Save, Download, Send, AlertCircle, Shield, Info, Mail, HelpCircle, Rocket } from 'lucide-react';
 import { toast } from 'sonner';
 import { ProspectingFilters as ProspectingFiltersType } from '@/types/prospecting';
 
@@ -134,7 +133,7 @@ const ClientArea: React.FC = () => {
       return;
     }
     
-    if (Object.values(filters).every(arr => !arr || arr.length === 0)) {
+    if (Object.values(filters).every(arr => !arr || (Array.isArray(arr) && arr.length === 0))) {
       toast.error("Por favor, selecione pelo menos um filtro.");
       return;
     }
@@ -150,7 +149,7 @@ const ClientArea: React.FC = () => {
       return;
     }
     
-    if (Object.values(filters).every(arr => !arr || arr.length === 0)) {
+    if (Object.values(filters).every(arr => !arr || (Array.isArray(arr) && arr.length === 0))) {
       toast.error("Por favor, selecione pelo menos um filtro.");
       return;
     }
@@ -178,6 +177,15 @@ const ClientArea: React.FC = () => {
     setFilters({});
     setCampaignName('');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const renderItem = (item: string[] | number, index: number) => {
+    if (typeof item === 'number') {
+      return <div key={index}>{item}</div>;
+    }
+    
+    // Now TypeScript knows item is a string[]
+    return <div key={index}>{item.join(', ')}</div>;
   };
 
   if (isInitialized && !isAuthenticated) {
