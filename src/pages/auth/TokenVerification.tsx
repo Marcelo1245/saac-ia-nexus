@@ -3,10 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Shield, AlertCircle, CheckCircle, Loader } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface TokenVerificationProps {
   onVerify: (e: React.FormEvent) => Promise<void>;
@@ -94,18 +93,29 @@ const TokenVerification: React.FC<TokenVerificationProps> = ({ onVerify, token, 
       <form onSubmit={handleManualVerify}>
         <div className="space-y-6">
           <div className="flex justify-center mb-4">
-            <InputOTP
-              maxLength={4}
-              value={token}
-              onChange={handleOTPChange}
-              render={({ slots }) => (
-                <InputOTPGroup>
-                  {slots.map((slot, index) => (
-                    <InputOTPSlot key={index} index={index} className="bg-gray-700 text-white" />
-                  ))}
-                </InputOTPGroup>
-              )}
-            />
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <div>
+                    <InputOTP
+                      maxLength={4}
+                      value={token}
+                      onChange={handleOTPChange}
+                      render={({ slots }) => (
+                        <InputOTPGroup>
+                          {slots.map((slot, index) => (
+                            <InputOTPSlot key={index} index={index} className="bg-gray-700 text-white border-gray-600 focus:border-saac-blue" />
+                          ))}
+                        </InputOTPGroup>
+                      )}
+                    />
+                  </div>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Insira o código de 4 dígitos enviado ao seu e-mail ou fornecido pela equipe SAAC</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           
           {isValidating && (
@@ -114,7 +124,7 @@ const TokenVerification: React.FC<TokenVerificationProps> = ({ onVerify, token, 
                 <Loader className="animate-spin text-saac-blue mr-2" size={16} />
                 <span className="text-sm text-gray-300">Verificando token...</span>
               </div>
-              <Progress value={progress} className="h-2" />
+              <Progress value={progress} className="h-2" indicatorClassName="bg-saac-blue" />
             </div>
           )}
           

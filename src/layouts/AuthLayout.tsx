@@ -2,6 +2,7 @@
 import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { Shield } from 'lucide-react';
 
 const AuthLayout: React.FC = () => {
   const { isAuthenticated, isInitialized } = useAuth();
@@ -10,25 +11,36 @@ const AuthLayout: React.FC = () => {
   if (!isInitialized) {
     return (
       <div className="min-h-screen bg-saac-dark flex items-center justify-center p-4">
-        <div className="text-gray-400">Carregando...</div>
+        <div className="flex items-center space-x-2">
+          <div className="h-5 w-5 bg-saac-blue/60 rounded-full animate-pulse"></div>
+          <div className="h-5 w-5 bg-saac-blue/60 rounded-full animate-pulse delay-150"></div>
+          <div className="h-5 w-5 bg-saac-blue/60 rounded-full animate-pulse delay-300"></div>
+        </div>
       </div>
     );
   }
 
   // Redirect to dashboard if already authenticated
   if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/client-area" replace />;
   }
 
   return (
     <div className="min-h-screen bg-saac-dark flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-white mb-2">SAAC</h1>
+          <div className="flex justify-center mb-4">
+            <Shield className="h-12 w-12 text-saac-blue" />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-2">SAAC.IA</h1>
           <p className="text-gray-400">Sistema de Automação para Aquisição de Clientes</p>
         </div>
-        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
           <Outlet />
+        </div>
+        <div className="mt-6 flex items-center justify-center text-xs text-gray-500">
+          <Shield className="h-3 w-3 mr-1 text-green-400" />
+          <span>Protocolo de segurança SSL/TLS ativado</span>
         </div>
       </div>
     </div>
