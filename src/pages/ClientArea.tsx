@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -122,7 +123,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { CalendarRange } from "@/components/ui/calendar-range"
 import {
   Form,
   FormControl,
@@ -135,41 +135,6 @@ import {
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import {
-  DrawerDemo,
-  SheetDemo,
-  AlertDialogDemo,
-  TooltipDemo,
-  PopoverDemo,
-  DropdownMenuDemo,
-  SelectDemo,
-  CommandDemo,
-  CalendarDemo,
-  TextareaDemo,
-  InputDemo,
-  LabelDemo,
-  ButtonDemo,
-  CardDemo,
-  TableDemo,
-  AvatarDemo,
-  BadgeDemo,
-  CheckboxDemo,
-  SliderDemo,
-  SeparatorDemo,
-  AccordionDemo,
-  ProgressDemo,
-  ToastDemo,
-  MenubarDemo,
-  AspectRatioDemo,
-  CarouselDemo,
-  ScrollAreaDemo,
-  SheetDemo1,
-  SkeletonDemo,
-  SwitchDemo,
-  TabsDemo,
-  CalendarRangeDemo,
-  FormDemo,
-} from "@/components/demo"
 import { ProspectingFilters } from '@/types/prospecting';
 import FilterSystem from '@/components/client/FilterSystem';
 
@@ -212,12 +177,10 @@ const ClientArea = () => {
 
   const handlePreviewClick = () => {
     setEstimatedLeads(Math.floor(Math.random() * 1000));
-    toast({
-      title: "Preview Clicked!",
-      description: "Simulating lead estimation...",
-    })
+    toast('Simulating lead estimation...');
   };
 
+  // Helper function to safely check array length
   const ensureStringArray = (value: number | string[] | undefined): string[] => {
     if (Array.isArray(value)) return value;
     if (typeof value === 'number') return [];

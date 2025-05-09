@@ -27,7 +27,7 @@ export interface ProspectingFilters {
   // Custom filters
   customTags?: string[];
   
-  // Added field that was missing
+  // Annual revenues field
   annualRevenues?: string[];
 }
 
