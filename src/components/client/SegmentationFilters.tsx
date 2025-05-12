@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -15,6 +14,12 @@ import { ProspectingFilters, CompanySize, HierarchyLevel, FunctionalRole, Recent
 import { toast } from 'sonner';
 import { Filter, Building, Globe, Users, Briefcase } from 'lucide-react';
 
+// Helper function to safely check array length - defining it outside the component
+const ensureArrayLength = (value: any): number => {
+  if (Array.isArray(value)) return value.length;
+  return 0;
+};
+
 const SegmentationFilters: React.FC = () => {
   const [filters, setFilters] = useState<Partial<ProspectingFilters>>({
     industries: [],
@@ -26,12 +31,6 @@ const SegmentationFilters: React.FC = () => {
     interactions: [],
     techStacks: []
   });
-  
-  // Helper function to safely check array length
-  const ensureArrayLength = (value: any): number => {
-    if (Array.isArray(value)) return value.length;
-    return 0;
-  };
   
   const [campaignName, setCampaignName] = useState('');
   const [leadTarget, setLeadTarget] = useState<number[]>([100]);
@@ -158,7 +157,7 @@ const SegmentationFilters: React.FC = () => {
       return;
     }
 
-    if (Object.values(filters).every(arr => arr?.length === 0)) {
+    if (Object.values(filters).every(arr => ensureArrayLength(arr) === 0)) {
       toast.error("Por favor, selecione pelo menos um filtro.");
       return;
     }
@@ -228,18 +227,6 @@ const SegmentationFilters: React.FC = () => {
     }
     updateEstimate();
   };
-
-  // Add this helper function somewhere in the file, before it's used:
-  const ensureArrayLength = (value: any): number => {
-    if (Array.isArray(value)) return value.length;
-    return 0;
-  };
-
-  // Then modify line 153 and other similar checks to use this helper:
-  // Replace instances like:
-  // (filters.industries?.length || 0)
-  // With:
-  // ensureArrayLength(filters.industries)
 
   return (
     <div className="space-y-6">
@@ -512,44 +499,44 @@ const SegmentationFilters: React.FC = () => {
               <div className="space-y-2">
                 <h3 className="text-white font-medium">Filtros Aplicados:</h3>
                 <div className="space-y-1">
-                  {(filters.industries || []).length > 0 && (
+                  {ensureArrayLength(filters.industries) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Indústrias:</span> <span className="text-white">{filters.industries?.length}</span>
+                      <span className="text-gray-400">Indústrias:</span> <span className="text-white">{ensureArrayLength(filters.industries)}</span>
                     </div>
                   )}
-                  {(filters.companySizes || []).length > 0 && (
+                  {ensureArrayLength(filters.companySizes) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Tamanhos de Empresa:</span> <span className="text-white">{filters.companySizes?.length}</span>
+                      <span className="text-gray-400">Tamanhos de Empresa:</span> <span className="text-white">{ensureArrayLength(filters.companySizes)}</span>
                     </div>
                   )}
-                  {(filters.annualRevenues || []).length > 0 && (
+                  {ensureArrayLength(filters.annualRevenues) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Faixas de Receita:</span> <span className="text-white">{filters.annualRevenues?.length}</span>
+                      <span className="text-gray-400">Faixas de Receita:</span> <span className="text-white">{ensureArrayLength(filters.annualRevenues)}</span>
                     </div>
                   )}
-                  {(filters.hierarchyLevels || []).length > 0 && (
+                  {ensureArrayLength(filters.hierarchyLevels) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Níveis Hierárquicos:</span> <span className="text-white">{filters.hierarchyLevels?.length}</span>
+                      <span className="text-gray-400">Níveis Hierárquicos:</span> <span className="text-white">{ensureArrayLength(filters.hierarchyLevels)}</span>
                     </div>
                   )}
-                  {(filters.functionalRoles || []).length > 0 && (
+                  {ensureArrayLength(filters.functionalRoles) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Funções:</span> <span className="text-white">{filters.functionalRoles?.length}</span>
+                      <span className="text-gray-400">Funções:</span> <span className="text-white">{ensureArrayLength(filters.functionalRoles)}</span>
                     </div>
                   )}
-                  {(filters.recentActivities || []).length > 0 && (
+                  {ensureArrayLength(filters.recentActivities) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Atividades Recentes:</span> <span className="text-white">{filters.recentActivities?.length}</span>
+                      <span className="text-gray-400">Atividades Recentes:</span> <span className="text-white">{ensureArrayLength(filters.recentActivities)}</span>
                     </div>
                   )}
-                  {(filters.interactions || []).length > 0 && (
+                  {ensureArrayLength(filters.interactions) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Interações:</span> <span className="text-white">{filters.interactions?.length}</span>
+                      <span className="text-gray-400">Interações:</span> <span className="text-white">{ensureArrayLength(filters.interactions)}</span>
                     </div>
                   )}
-                  {(filters.techStacks || []).length > 0 && (
+                  {ensureArrayLength(filters.techStacks) > 0 && (
                     <div className="text-xs">
-                      <span className="text-gray-400">Tecnologias:</span> <span className="text-white">{filters.techStacks?.length}</span>
+                      <span className="text-gray-400">Tecnologias:</span> <span className="text-white">{ensureArrayLength(filters.techStacks)}</span>
                     </div>
                   )}
                 </div>
