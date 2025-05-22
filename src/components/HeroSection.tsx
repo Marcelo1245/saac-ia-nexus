@@ -1,11 +1,12 @@
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import HeroAnimation from './HeroAnimation';
 
 const HeroSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [showVoiceflowChat, setShowVoiceflowChat] = useState(false);
   
   useEffect(() => {
     const handleParallax = () => {
@@ -26,6 +27,49 @@ const HeroSection: React.FC = () => {
     };
   }, []);
   
+  const loadVoiceflowWidget = () => {
+    setShowVoiceflowChat(true);
+    
+    // Add Voiceflow script only if it hasn't been loaded yet
+    if (!document.getElementById('voiceflow-script-hero')) {
+      const script = document.createElement('script');
+      script.id = 'voiceflow-script-hero';
+      script.type = 'text/javascript';
+      script.onload = () => {
+        // @ts-ignore
+        window.voiceflow?.chat.load({
+          verify: { projectID: '67d04783ad9ed2f668b04618' },
+          url: 'https://general-runtime.voiceflow.com/',
+          versionID: 'production',
+          voice: {
+            url: "https://runtime-api.voiceflow.com/"
+          },
+          render: {
+            mode: 'embedded',
+            target: document.getElementById('voiceflow-container-hero')
+          }
+        });
+      };
+      script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+      document.head.appendChild(script);
+    } else {
+      // If script already loaded, just initialize the widget
+      // @ts-ignore
+      window.voiceflow?.chat.load({
+        verify: { projectID: '67d04783ad9ed2f668b04618' },
+        url: 'https://general-runtime.voiceflow.com/',
+        versionID: 'production',
+        voice: {
+          url: "https://runtime-api.voiceflow.com/"
+        },
+        render: {
+          mode: 'embedded',
+          target: document.getElementById('voiceflow-container-hero')
+        }
+      });
+    }
+  };
+  
   return (
     <section 
       ref={sectionRef} 
@@ -39,41 +83,62 @@ const HeroSection: React.FC = () => {
       </div>
       
       <div className="container mx-auto px-4 md:px-6 z-10 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-          <div className="space-y-6 md:space-y-8 parallax" data-speed="0.1">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in">
-              <span className="text-white">Prospecção Inteligente</span>
-              <br />
-              <span className="text-gradient-blue">Automatizada 24/7</span>
-            </h1>
-            
-            <p className="text-gray-300 text-lg md:text-xl animate-fade-in opacity-0" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
-              O sistema de IA que <span className="text-white font-medium">captura, qualifica e agenda reuniões</span> de forma 100% automatizada para escalar suas vendas.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 animate-fade-in opacity-0" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+        {showVoiceflowChat ? (
+          <div className="glass-card rounded-xl p-8 max-w-4xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-semibold text-white">Agende sua conversa</h3>
               <Button 
-                className="bg-gradient-blue hover:opacity-90 text-white shadow-lg py-6 px-8 rounded-md"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                variant="ghost" 
+                className="text-gray-400 hover:text-white"
+                onClick={() => setShowVoiceflowChat(false)}
               >
-                Agendar Demonstração
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              
-              <Button 
-                variant="outline" 
-                className="border-saac-blue text-saac-blue hover:text-white hover:bg-saac-blue/20 py-6 px-8 rounded-md"
-                onClick={() => document.getElementById('solution')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Conhecer Solução
+                Voltar
               </Button>
             </div>
+            
+            <div id="voiceflow-container-hero" className="bg-saac-grafite/50 rounded-lg p-4 min-h-[400px]">
+              <div className="flex items-center justify-center h-full">
+                <p className="text-gray-400">Carregando assistente virtual...</p>
+              </div>
+            </div>
           </div>
-          
-          <div className="hidden lg:block">
-            <HeroAnimation />
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="space-y-6 md:space-y-8 parallax" data-speed="0.1">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in">
+                <span className="text-white">Prospecção Inteligente</span>
+                <br />
+                <span className="text-gradient-blue">Automatizada 24/7</span>
+              </h1>
+              
+              <p className="text-gray-300 text-lg md:text-xl animate-fade-in opacity-0" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+                O sistema de IA que <span className="text-white font-medium">captura, qualifica e agenda reuniões</span> de forma 100% automatizada para escalar suas vendas.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 animate-fade-in opacity-0" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+                <Button 
+                  className="bg-gradient-blue hover:opacity-90 text-white shadow-lg py-6 px-8 rounded-md"
+                  onClick={loadVoiceflowWidget}
+                >
+                  Agendar Demonstração
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  className="border-saac-blue text-saac-blue hover:text-white hover:bg-saac-blue/20 py-6 px-8 rounded-md"
+                  onClick={() => document.getElementById('solution')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Conhecer Solução
+                </Button>
+              </div>
+            </div>
+            
+            <div className="hidden lg:block">
+              <HeroAnimation />
+            </div>
           </div>
-        </div>
+        )}
       </div>
       
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
