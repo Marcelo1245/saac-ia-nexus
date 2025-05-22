@@ -15,6 +15,7 @@ import Register from "./pages/auth/Register";
 import AuthLayout from "./layouts/AuthLayout";
 import { AuthProvider } from "./contexts/AuthContext";
 import ClientArea from "./pages/ClientArea";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 // Create a new query client instance
 const queryClient = new QueryClient({
@@ -35,7 +36,13 @@ const App = () => (
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/client-area" element={<ClientArea />} />
+            
+            {/* Área protegida do cliente */}
+            <Route path="/client-area" element={
+              <ProtectedRoute>
+                <ClientArea />
+              </ProtectedRoute>
+            } />
             
             <Route path="/auth" element={<AuthLayout />}>
               <Route path="login" element={<Login />} />

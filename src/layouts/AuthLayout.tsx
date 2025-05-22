@@ -20,7 +20,7 @@ const AuthLayout: React.FC = () => {
     );
   }
 
-  // Redirect to dashboard if already authenticated
+  // Redirect to client area if already authenticated
   if (isAuthenticated) {
     return <Navigate to="/client-area" replace />;
   }
@@ -35,7 +35,7 @@ const AuthLayout: React.FC = () => {
           <h1 className="text-3xl font-bold text-white mb-2">SAAC.IA</h1>
           <p className="text-gray-400">Sistema de Automação para Aquisição de Clientes</p>
         </div>
-        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700">
+        <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700 transition-all hover:border-saac-blue/50 hover:shadow-saac-blue/10">
           <Outlet />
         </div>
         <div className="mt-6 flex items-center justify-center text-xs text-gray-500">
