@@ -103,9 +103,14 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-saac-blue transition-colors">
-                  Cookies
-                </a>
+                <Link 
+                  to="/cookies"
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-saac-blue transition-colors"
+                >
+                  Política de cookies
+                </Link>
               </li>
             </ul>
           </div>
