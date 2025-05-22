@@ -93,9 +93,14 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-saac-blue transition-colors">
+                <Link 
+                  to="/privacy" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-saac-blue transition-colors"
+                >
                   Políticas de privacidade
-                </a>
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-saac-blue transition-colors">
