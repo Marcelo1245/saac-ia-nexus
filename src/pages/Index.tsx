@@ -10,7 +10,6 @@ import ResultsSection from "@/components/ResultsSection";
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
-import ChatbotWidget from "@/components/ChatbotWidget";
 import { Button } from "@/components/ui/button";
 
 const Index = () => {
@@ -34,7 +33,6 @@ const Index = () => {
         <ContactSection />
       </main>
       <Footer />
-      <ChatbotWidget />
     </div>
   );
 };
