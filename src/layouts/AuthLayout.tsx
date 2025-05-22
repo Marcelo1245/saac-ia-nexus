@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet, Navigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { Shield } from 'lucide-react';
+import { Shield, ArrowLeft } from 'lucide-react';
 
 const AuthLayout: React.FC = () => {
   const { isAuthenticated, isInitialized } = useAuth();
@@ -38,9 +38,15 @@ const AuthLayout: React.FC = () => {
         <div className="bg-gray-800 rounded-lg shadow-lg overflow-hidden border border-gray-700 transition-all hover:border-saac-blue/50 hover:shadow-saac-blue/10">
           <Outlet />
         </div>
-        <div className="mt-6 flex items-center justify-center text-xs text-gray-500">
-          <Shield className="h-3 w-3 mr-1 text-green-400" />
-          <span>Protocolo de segurança SSL/TLS ativado</span>
+        <div className="mt-6 flex items-center justify-between">
+          <Link to="/" className="flex items-center text-saac-blue hover:text-saac-blue/80 transition-colors">
+            <ArrowLeft className="h-4 w-4 mr-1" />
+            <span className="text-sm">Voltar para a página inicial</span>
+          </Link>
+          <div className="flex items-center text-xs text-gray-500">
+            <Shield className="h-3 w-3 mr-1 text-green-400" />
+            <span>Protocolo de segurança SSL/TLS ativado</span>
+          </div>
         </div>
       </div>
     </div>
