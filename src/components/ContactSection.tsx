@@ -3,11 +3,12 @@ import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MessageSquare, Calendar } from 'lucide-react';
 
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [showVoiceflowChat, setShowVoiceflowChat] = useState(false);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,6 +33,49 @@ const ContactSection: React.FC = () => {
       }
     };
   }, []);
+
+  const loadVoiceflowWidget = () => {
+    setShowVoiceflowChat(true);
+    
+    // Add Voiceflow script only if it hasn't been loaded yet
+    if (!document.getElementById('voiceflow-script')) {
+      const script = document.createElement('script');
+      script.id = 'voiceflow-script';
+      script.type = 'text/javascript';
+      script.onload = () => {
+        // @ts-ignore
+        window.voiceflow?.chat.load({
+          verify: { projectID: '67d04783ad9ed2f668b04618' },
+          url: 'https://general-runtime.voiceflow.com/',
+          versionID: 'production',
+          voice: {
+            url: "https://runtime-api.voiceflow.com/"
+          },
+          render: {
+            mode: 'embedded',
+            target: document.getElementById('voiceflow-container')
+          }
+        });
+      };
+      script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+      document.head.appendChild(script);
+    } else {
+      // If script already loaded, just initialize the widget
+      // @ts-ignore
+      window.voiceflow?.chat.load({
+        verify: { projectID: '67d04783ad9ed2f668b04618' },
+        url: 'https://general-runtime.voiceflow.com/',
+        versionID: 'production',
+        voice: {
+          url: "https://runtime-api.voiceflow.com/"
+        },
+        render: {
+          mode: 'embedded',
+          target: document.getElementById('voiceflow-container')
+        }
+      });
+    }
+  };
 
   return (
     <section
@@ -65,147 +109,179 @@ const ContactSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <div 
-            className={`glass-card rounded-xl p-8 transition-all duration-700 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-            }`}
-          >
-            <h3 className="text-xl font-semibold text-white mb-6">Solicite uma demonstração</h3>
-            
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm text-gray-300">Nome completo</label>
-                  <Input 
-                    id="name" 
-                    placeholder="Seu nome" 
-                    className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm text-gray-300">E-mail corporativo</label>
-                  <Input 
-                    id="email" 
-                    type="email" 
-                    placeholder="seu@email.com" 
-                    className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
-                  />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label htmlFor="company" className="text-sm text-gray-300">Empresa</label>
-                  <Input 
-                    id="company" 
-                    placeholder="Nome da empresa" 
-                    className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
-                  />
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm text-gray-300">Telefone</label>
-                  <Input 
-                    id="phone" 
-                    placeholder="(00) 00000-0000" 
-                    className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <label htmlFor="message" className="text-sm text-gray-300">Mensagem</label>
-                <Textarea 
-                  id="message" 
-                  placeholder="Como podemos ajudar sua empresa?" 
-                  className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
-                  rows={4}
-                />
-              </div>
-              
+        {showVoiceflowChat ? (
+          <div className="glass-card rounded-xl p-8 max-w-4xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-xl font-semibold text-white">Agende sua conversa</h3>
               <Button 
-                type="submit"
-                className="w-full bg-gradient-blue hover:opacity-90"
+                variant="ghost" 
+                className="text-gray-400 hover:text-white"
+                onClick={() => setShowVoiceflowChat(false)}
               >
-                Solicitar Demonstração
+                Voltar
               </Button>
-              
-              <p className="text-xs text-gray-400 text-center">
-                Ao enviar, você concorda com nossa política de privacidade e termos de uso.
-              </p>
-            </form>
+            </div>
+            
+            <div id="voiceflow-container" className="bg-saac-grafite/50 rounded-lg p-4 min-h-[400px]">
+              <div className="flex items-center justify-center h-full">
+                <p className="text-gray-400">Carregando assistente virtual...</p>
+              </div>
+            </div>
           </div>
-          
-          {/* Contact Info */}
-          <div className="space-y-8 lg:pl-8">
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            {/* Contact Form */}
             <div 
-              className={`transition-all duration-700 delay-500 ${
+              className={`glass-card rounded-xl p-8 transition-all duration-700 delay-300 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
               }`}
             >
-              <h3 className="text-xl font-semibold text-white mb-6">Entre em contato diretamente</h3>
+              <h3 className="text-xl font-semibold text-white mb-6">Solicite uma demonstração</h3>
               
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="w-12 h-12 rounded-full bg-saac-blue/10 flex items-center justify-center mr-4 flex-shrink-0">
-                    <Mail className="w-5 h-5 text-saac-blue" />
+              <Button 
+                type="button"
+                className="w-full bg-gradient-blue hover:opacity-90 mb-6 flex items-center justify-center gap-2"
+                onClick={loadVoiceflowWidget}
+              >
+                <Calendar className="h-5 w-5" />
+                Agendar Demonstração
+              </Button>
+              
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-sm text-gray-300">Nome completo</label>
+                    <Input 
+                      id="name" 
+                      placeholder="Seu nome" 
+                      className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
+                    />
                   </div>
-                  <div>
-                    <h4 className="text-white font-medium mb-1">Email</h4>
-                    <a href="mailto:contato@saacia.com.br" className="text-gray-300 hover:text-saac-blue transition-colors">
-                      contato@saacia.com.br
-                    </a>
+                  
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm text-gray-300">E-mail corporativo</label>
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="seu@email.com" 
+                      className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
+                    />
                   </div>
                 </div>
                 
-                <div className="flex items-start">
-                  <div className="w-12 h-12 rounded-full bg-saac-blue/10 flex items-center justify-center mr-4 flex-shrink-0">
-                    <Phone className="w-5 h-5 text-saac-blue" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="company" className="text-sm text-gray-300">Empresa</label>
+                    <Input 
+                      id="company" 
+                      placeholder="Nome da empresa" 
+                      className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
+                    />
                   </div>
-                  <div>
-                    <h4 className="text-white font-medium mb-1">Telefone</h4>
-                    <a href="tel:+551199999-9999" className="text-gray-300 hover:text-saac-blue transition-colors">
-                      +55 (11) 99999-9999
-                    </a>
+                  
+                  <div className="space-y-2">
+                    <label htmlFor="phone" className="text-sm text-gray-300">Telefone</label>
+                    <Input 
+                      id="phone" 
+                      placeholder="(00) 00000-0000" 
+                      className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
+                    />
                   </div>
                 </div>
                 
-                <div className="flex items-start">
-                  <div className="w-12 h-12 rounded-full bg-saac-blue/10 flex items-center justify-center mr-4 flex-shrink-0">
-                    <MessageSquare className="w-5 h-5 text-saac-blue" />
+                <div className="space-y-2">
+                  <label htmlFor="message" className="text-sm text-gray-300">Mensagem</label>
+                  <Textarea 
+                    id="message" 
+                    placeholder="Como podemos ajudar sua empresa?" 
+                    className="bg-saac-grafite/50 border-gray-700 focus:border-saac-blue"
+                    rows={4}
+                  />
+                </div>
+                
+                <Button 
+                  type="submit"
+                  className="w-full bg-gradient-blue hover:opacity-90"
+                >
+                  Enviar Mensagem
+                </Button>
+                
+                <p className="text-xs text-gray-400 text-center">
+                  Ao enviar, você concorda com nossa política de privacidade e termos de uso.
+                </p>
+              </form>
+            </div>
+            
+            {/* Contact Info */}
+            <div className="space-y-8 lg:pl-8">
+              <div 
+                className={`transition-all duration-700 delay-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                }`}
+              >
+                <h3 className="text-xl font-semibold text-white mb-6">Entre em contato diretamente</h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 rounded-full bg-saac-blue/10 flex items-center justify-center mr-4 flex-shrink-0">
+                      <Mail className="w-5 h-5 text-saac-blue" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Email</h4>
+                      <a href="mailto:contato@saacia.com.br" className="text-gray-300 hover:text-saac-blue transition-colors">
+                        contato@saacia.com.br
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-white font-medium mb-1">WhatsApp</h4>
-                    <a href="https://wa.me/5511999999999" className="text-gray-300 hover:text-saac-blue transition-colors">
-                      Iniciar conversa
-                    </a>
+                  
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 rounded-full bg-saac-blue/10 flex items-center justify-center mr-4 flex-shrink-0">
+                      <Phone className="w-5 h-5 text-saac-blue" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">Telefone</h4>
+                      <a href="tel:+551199999-9999" className="text-gray-300 hover:text-saac-blue transition-colors">
+                        +55 (11) 99999-9999
+                      </a>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <div className="w-12 h-12 rounded-full bg-saac-blue/10 flex items-center justify-center mr-4 flex-shrink-0">
+                      <MessageSquare className="w-5 h-5 text-saac-blue" />
+                    </div>
+                    <div>
+                      <h4 className="text-white font-medium mb-1">WhatsApp</h4>
+                      <a href="https://wa.me/5511999999999" className="text-gray-300 hover:text-saac-blue transition-colors">
+                        Iniciar conversa
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <div 
-              className={`glass-card rounded-xl p-8 transition-all duration-700 delay-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-              }`}
-            >
-              <h3 className="text-xl font-semibold text-white mb-4">Agende uma reunião</h3>
               
-              <p className="text-gray-300 mb-6">
-                Prefere escolher um horário específico? Agende diretamente uma reunião com um de nossos especialistas.
-              </p>
-              
-              <Button 
-                className="w-full bg-saac-blue/20 text-saac-blue hover:bg-saac-blue/30 border border-saac-blue/50"
+              <div 
+                className={`glass-card rounded-xl p-8 transition-all duration-700 delay-700 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                }`}
               >
-                Agendar Reunião
-              </Button>
+                <h3 className="text-xl font-semibold text-white mb-4">Agende uma reunião</h3>
+                
+                <p className="text-gray-300 mb-6">
+                  Prefere escolher um horário específico? Agende diretamente uma reunião com um de nossos especialistas.
+                </p>
+                
+                <Button 
+                  className="w-full bg-saac-blue/20 text-saac-blue hover:bg-saac-blue/30 border border-saac-blue/50 flex items-center justify-center gap-2"
+                  onClick={loadVoiceflowWidget}
+                >
+                  <Calendar className="h-5 w-5" />
+                  Agendar Reunião
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
