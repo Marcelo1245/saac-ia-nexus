@@ -228,8 +228,8 @@ const ContactSection: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-white font-medium mb-1">Email</h4>
-                      <a href="mailto:contato@saacia.com.br" className="text-gray-300 hover:text-saac-blue transition-colors">
-                        contato@saacia.com.br
+                      <a href="mailto:ContatoComercial@saacia.com" className="text-gray-300 hover:text-saac-blue transition-colors">
+                        ContatoComercial@saacia.com
                       </a>
                     </div>
                   </div>
@@ -239,9 +239,9 @@ const ContactSection: React.FC = () => {
                       <Phone className="w-5 h-5 text-saac-blue" />
                     </div>
                     <div>
-                      <h4 className="text-white font-medium mb-1">Telefone</h4>
-                      <a href="tel:+551199999-9999" className="text-gray-300 hover:text-saac-blue transition-colors">
-                        +55 (11) 99999-9999
+                      <h4 className="text-white font-medium mb-1">Telefone Suporte</h4>
+                      <a href="tel:+5548998159763" className="text-gray-300 hover:text-saac-blue transition-colors">
+                        +55 (48) 99815-9763
                       </a>
                     </div>
                   </div>
@@ -252,7 +252,7 @@ const ContactSection: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-white font-medium mb-1">WhatsApp</h4>
-                      <a href="https://wa.me/5511999999999" className="text-gray-300 hover:text-saac-blue transition-colors">
+                      <a href="https://wa.me/5548998159763" className="text-gray-300 hover:text-saac-blue transition-colors">
                         Iniciar conversa
                       </a>
                     </div>
