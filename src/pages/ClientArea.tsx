@@ -53,7 +53,7 @@ import {
 } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
-import { CalendarIcon } from "lucide-react"
+import { CalendarIcon, Home } from "lucide-react"
 import { DateRange } from "react-day-picker"
 import {
   Command,
@@ -137,8 +137,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { ProspectingFilters } from '@/types/prospecting';
 import FilterSystem from '@/components/client/FilterSystem';
+import { Link } from 'react-router-dom';
 
 const ClientArea = () => {
+  const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(false);
   const [campaignName, setCampaignName] = useState('');
   const [filters, setFilters] = useState<Partial<ProspectingFilters>>({});
@@ -180,6 +182,10 @@ const ClientArea = () => {
     toast('Simulating lead estimation...');
   };
 
+  const handleReturnHome = () => {
+    navigate('/');
+  };
+
   // Helper function to safely check array length
   const ensureStringArray = (value: number | string[] | undefined): string[] => {
     if (Array.isArray(value)) return value;
@@ -189,7 +195,17 @@ const ClientArea = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Client Area</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Client Area</h1>
+        <Button 
+          variant="outline" 
+          onClick={handleReturnHome} 
+          className="flex items-center gap-2"
+        >
+          <Home size={16} />
+          Voltar à Página Inicial
+        </Button>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle>Segmentation Filters</CardTitle>
