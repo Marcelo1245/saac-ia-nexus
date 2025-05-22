@@ -1,7 +1,9 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
+// Ensure we export all necessary types
 type User = {
   id: string;
   name: string;
@@ -40,8 +42,10 @@ type AuthContextType = {
   resetLoginAttempts: () => void;
 };
 
+// Create context with a default value
 const AuthContext = createContext<AuthContextType | null>(null);
 
+// Export the useAuth hook with proper error handling
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) throw new Error('useAuth must be used within an AuthProvider');
@@ -73,6 +77,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const storedUser = localStorage.getItem('user');
     const lockoutUntil = localStorage.getItem('lockoutUntil');
     const loginAttempts = localStorage.getItem('loginAttempts');
+    
+    console.log("AuthProvider initialized, checking stored user:", storedUser ? "Found" : "None");
     
     setState(prev => ({
       ...prev,
@@ -109,7 +115,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
   };
 
-  // Simulate auth methods
+  // Login method
   const login = async (email: string, password: string, rememberMe = false) => {
     // Check if user is locked out
     if (isLockedOut) {
@@ -188,6 +194,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       resetLoginAttempts();
       
+      console.log("Login successful, user authenticated:", userData.email);
       // No navigation here - this will be handled by the Login component
     } catch (error) {
       console.error('Login failed:', error);
@@ -343,6 +350,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const logout = () => {
+    console.log("Logging out user");
     setState(prev => ({ 
       ...prev,
       user: null,
