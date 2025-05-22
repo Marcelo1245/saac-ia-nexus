@@ -38,7 +38,7 @@ const HeroSection: React.FC = () => {
       script.onload = () => {
         // @ts-ignore
         window.voiceflow?.chat.load({
-          verify: { projectID: '67d9b57c67f2c73e7ec365b8' },
+          verify: { projectID: '67d04783ad9ed2f668b04618' },
           url: 'https://general-runtime.voiceflow.com/',
           versionID: 'production',
           voice: {
@@ -56,7 +56,7 @@ const HeroSection: React.FC = () => {
       // If script already loaded, just initialize the widget
       // @ts-ignore
       window.voiceflow?.chat.load({
-        verify: { projectID: '67d9b57c67f2c73e7ec365b8' },
+        verify: { projectID: '67d04783ad9ed2f668b04618' },
         url: 'https://general-runtime.voiceflow.com/',
         versionID: 'production',
         voice: {
