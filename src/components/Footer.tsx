@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   const scrollToSection = (id: string) => {
@@ -82,7 +83,12 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-medium mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="#" className="hover:text-saac-blue transition-colors">
+                <a 
+                  href="/terms" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-saac-blue transition-colors"
+                >
                   Termos de serviço
                 </a>
               </li>

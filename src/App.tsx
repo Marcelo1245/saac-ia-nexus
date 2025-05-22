@@ -16,6 +16,7 @@ import AuthLayout from "./layouts/AuthLayout";
 import { AuthProvider } from "./contexts/AuthContext";
 import ClientArea from "./pages/ClientArea";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import TermsOfService from "./pages/TermsOfService";
 
 // Create a new query client instance
 const queryClient = new QueryClient({
@@ -36,6 +37,7 @@ const App = () => (
           <Sonner />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/terms" element={<TermsOfService />} />
             
             {/* Área protegida do cliente */}
             <Route path="/client-area" element={
