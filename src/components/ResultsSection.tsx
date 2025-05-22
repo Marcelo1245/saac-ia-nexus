@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Clock, CheckCircle, Search } from 'lucide-react';
@@ -154,51 +155,6 @@ const ResultsSection: React.FC = () => {
               </p>
             </div>
           ))}
-        </div>
-        
-        {/* Testimonials */}
-        <div 
-          className={`mt-20 glass-card rounded-xl p-8 transition-all duration-700 delay-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
-          }`}
-        >
-          <h3 className="text-xl font-semibold text-white mb-6">O que nossos clientes dizem</h3>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-lg bg-saac-grafite/30 border border-gray-800">
-              <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-full bg-saac-blue/20 flex items-center justify-center mr-4">
-                  <span className="text-xl font-bold text-saac-blue">A</span>
-                </div>
-                
-                <div>
-                  <h4 className="text-white font-semibold">Ana Silva</h4>
-                  <p className="text-sm text-gray-400">Diretora Comercial, Tech Solutions</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-300 italic">
-                "Triplicamos o número de reuniões qualificadas sem aumentar a equipe de SDRs. A SAAC.IA revolucionou nosso processo de prospecção."
-              </p>
-            </div>
-            
-            <div className="p-6 rounded-lg bg-saac-grafite/30 border border-gray-800">
-              <div className="flex items-start mb-4">
-                <div className="w-12 h-12 rounded-full bg-saac-blue/20 flex items-center justify-center mr-4">
-                  <span className="text-xl font-bold text-saac-blue">M</span>
-                </div>
-                
-                <div>
-                  <h4 className="text-white font-semibold">Marcos Oliveira</h4>
-                  <p className="text-sm text-gray-400">CEO, Inovate Solutions</p>
-                </div>
-              </div>
-              
-              <p className="text-gray-300 italic">
-                "Conseguimos escalar nossas operações para novos mercados em tempo recorde. A comunicação personalizada gerada pela IA superou nossas expectativas."
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
