@@ -45,7 +45,7 @@ const ContactSection: React.FC = () => {
       script.onload = () => {
         // @ts-ignore
         window.voiceflow?.chat.load({
-          verify: { projectID: '67d04783ad9ed2f668b04618' },
+          verify: { projectID: '67d9b57c67f2c73e7ec365b8' },
           url: 'https://general-runtime.voiceflow.com/',
           versionID: 'production',
           voice: {
@@ -63,7 +63,7 @@ const ContactSection: React.FC = () => {
       // If script already loaded, just initialize the widget
       // @ts-ignore
       window.voiceflow?.chat.load({
-        verify: { projectID: '67d04783ad9ed2f668b04618' },
+        verify: { projectID: '67d9b57c67f2c73e7ec365b8' },
         url: 'https://general-runtime.voiceflow.com/',
         versionID: 'production',
         voice: {
