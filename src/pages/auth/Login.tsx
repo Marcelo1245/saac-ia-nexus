@@ -46,11 +46,18 @@ const Login: React.FC = () => {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       
       // Em um sistema real, você chamaria a API de login aqui
-      login(email, password);
+      await login(email, password);
+      
       toast.success('Login realizado com sucesso!');
+      
+      // Redirecionamento explícito para a área do cliente após login bem-sucedido
       navigate('/client-area');
     } catch (error) {
-      setError('Falha no login. Verifique suas credenciais.');
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError('Falha no login. Verifique suas credenciais.');
+      }
     } finally {
       setIsLoading(false);
     }

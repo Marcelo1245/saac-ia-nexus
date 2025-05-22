@@ -169,15 +169,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         email,
         company: 'SAAC',
         role: 'Admin',
-        isVerified: false,
-        verificationStatus: 'pending',
+        isVerified: true, // Set as already verified
+        verificationStatus: 'approved',
         lastLogin: new Date()
       };
       
       setSecurityCookie();
       setState(prev => ({ 
         ...prev, 
-        user: userData, 
+        user: userData,
+        isAuthenticated: true, // Explicitly set authentication state to true
         loginAttempts: 0 
       }));
       
@@ -187,7 +188,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       resetLoginAttempts();
       
-      // Note: Not navigating yet - will be handled after 2FA
+      // No navigation here - this will be handled by the Login component
     } catch (error) {
       console.error('Login failed:', error);
       if (error instanceof Error) {

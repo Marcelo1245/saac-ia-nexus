@@ -22,6 +22,7 @@ const AuthLayout: React.FC = () => {
 
   // Redirect to client area if already authenticated
   if (isAuthenticated) {
+    console.log("User is authenticated, redirecting to client area");
     return <Navigate to="/client-area" replace />;
   }
 
