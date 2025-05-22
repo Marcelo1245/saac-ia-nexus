@@ -33,6 +33,9 @@ export interface ProspectingFilters {
     from: Date;
     to: Date;
   };
+  
+  // Added back for compatibility with existing components
+  annualRevenues?: string[];
 }
 
 export interface ProspectingCampaign {
@@ -63,4 +66,54 @@ export interface ProspectLead {
   score?: number;
   lastActivity?: Date;
   campaignId: string;
+}
+
+// Define type aliases needed by components
+export type CompanySize = string;
+export type HierarchyLevel = string;
+export type FunctionalRole = string;
+export type Industry = string;
+export type RecentActivity = string;
+export type Interaction = string;
+export type TechStack = string;
+export type AnnualRevenue = string;
+
+// Additional types needed by other components
+export interface ContactTimeHeatmapData {
+  day: string;
+  hour: string;
+  value: number;
+}
+
+export interface Lead {
+  id: string;
+  name: string;
+  firstName?: string;
+  lastName?: string;
+  position?: string;
+  company?: string;
+  email?: string;
+  phone?: string;
+  status: 'new' | 'contacted' | 'engaged' | 'qualified' | 'proposal' | 'negotiation' | 'converted' | 'closed' | 'lost';
+  score?: number;
+  lastContact?: string;
+  industry?: string;
+  companySize?: string;
+  notes?: string;
+  lastActivity?: Date;
+  linkedInUrl?: string;
+  campaignId?: string;
+}
+
+export interface CampaignTemplate {
+  id: string;
+  name: string;
+  description?: string;
+  filters: Partial<ProspectingFilters>;
+  createdAt: string;
+  presetFilters?: Partial<ProspectingFilters>;
+  targetIndustries?: string[];
+  targetRoles?: string[];
+  conversionRate?: number;
+  recommendedMessages?: Array<{ subject: string; body: string }>;
 }
