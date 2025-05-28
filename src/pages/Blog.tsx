@@ -32,7 +32,7 @@ const Blog = () => {
       source: 'Forbes Brasil',
       sourceUrl: 'https://forbes.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjEyNSIgcj0iNDAiIGZpbGw9IiMwMGE4ZmYiIG9wYWNpdHk9IjAuMyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxNCIgZm9udC1mYW1pbHk9IkFyaWFsIj5JQTwvdGV4dD48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['IA', 'Marketing'],
       readTime: '5 min',
       publishDate: '15 Jan, 2024'
@@ -44,7 +44,7 @@ const Blog = () => {
       source: 'E-Commerce Brasil',
       sourceUrl: 'https://ecommercebrasil.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxyZWN0IHg9IjE1MCIgeT0iMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjUwIiBmaWxsPSIjMDBhOGZmIiBvcGFjaXR5PSIwLjMiLz48dGV4dCB4PSIyMDAiIHk9IjEzMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJBcmlhbCI+RS1jb21tZXJjZTwvdGV4dD48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['IA', 'E-commerce'],
       readTime: '7 min',
       publishDate: '12 Jan, 2024'
@@ -56,7 +56,7 @@ const Blog = () => {
       source: 'Reportei',
       sourceUrl: 'https://reportei.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxwYXRoIGQ9Ik0xNTAsMTI1IEwyNTAsMTI1IE0yMDAsMTAwIEwyMDAsMTUwIiBzdHJva2U9IiMwMGE4ZmYiIHN0cm9rZS13aWR0aD0iMyIgb3BhY2l0eT0iMC41Ii8+PHRleHQgeD0iMjAwIiB5PSIxODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iQXJpYWwiPkNvbnRlw7pkbzwvdGV4dD48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['IA', 'Marketing'],
       readTime: '6 min',
       publishDate: '10 Jan, 2024'
@@ -68,7 +68,7 @@ const Blog = () => {
       source: 'WebShare',
       sourceUrl: 'https://webshare.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjEyNSIgcj0iMzAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwYThmZiIgc3Ryb2tlLXdpZHRoPSIyIiBvcGFjaXR5PSIwLjUiLz48dGV4dCB4PSIyMDAiIHk9IjE3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJBcmlhbCI+U0VPPC90ZXh0Pjwvc3ZnPg==')",
+      image: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['SEO', 'IA'],
       readTime: '8 min',
       publishDate: '08 Jan, 2024'
@@ -80,7 +80,7 @@ const Blog = () => {
       source: 'Blogueira Inteligente',
       sourceUrl: 'https://blogueirainteligente.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxyZWN0IHg9IjE3MCIgeT0iMTAwIiB3aWR0aD0iNjAiIGhlaWdodD0iNTAiIGZpbGw9IiMwMGE4ZmYiIG9wYWNpdHk9IjAuMyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTcwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxMiIgZm9udC1mYW1pbHk9IkFyaWFsIj5GZXJyYW1lbnRhczwvdGV4dD48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['Ferramentas', 'IA'],
       readTime: '6 min',
       publishDate: '05 Jan, 2024'
@@ -92,7 +92,7 @@ const Blog = () => {
       source: 'E-Commerce Brasil',
       sourceUrl: 'https://ecommercebrasil.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxwYXRoIGQ9Ik0xMDAsMTgwIEwxNTAsMTQwIEwyMDAsMTIwIEwyNTAsMTAwIEwzMDAsODAiIHN0cm9rZT0iIzAwYThmZiIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjciLz48dGV4dCB4PSIyMDAiIHk9IjIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiIGZvbnQtc2l6ZT0iMTIiIGZvbnQtZmFtaWx5PSJBcmlhbCI+Q3Jlc2NpbWVudG88L3RleHQ+PC9zdmc+')",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['IA', 'Marketing'],
       readTime: '5 min',
       publishDate: '03 Jan, 2024'
@@ -104,7 +104,7 @@ const Blog = () => {
       source: 'E-Commerce Brasil',
       sourceUrl: 'https://ecommercebrasil.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjx0ZXh0IHg9IjIwMCIgeT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMDBhOGZmIiBmb250LXNpemU9IjI0IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtd2VpZ2h0PSJib2xkIiBvcGFjaXR5PSIwLjciPlNFTzwvdGV4dD48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['SEO', 'Marketing'],
       readTime: '7 min',
       publishDate: '01 Jan, 2024'
@@ -116,7 +116,7 @@ const Blog = () => {
       source: 'E-Commerce Brasil',
       sourceUrl: 'https://ecommercebrasil.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9IjEyNSIgcj0iMjAiIGZpbGw9IiMwMGE4ZmYiIG9wYWNpdHk9IjAuNSIvPjxjaXJjbGUgY3g9IjIyMCIgY3k9IjEyNSIgcj0iMjAiIGZpbGw9IiM2MzY2ZjEiIG9wYWNpdHk9IjAuNSIvPjx0ZXh0IHg9IjIwMCIgeT0iMTgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxMiIgZm9udC1mYW1pbHk9IkFyaWFsIj5IdW1hbm8gKyBJQTwvdGV4dD48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['IA', 'Marketing'],
       readTime: '9 min',
       publishDate: '28 Dez, 2023'
@@ -128,7 +128,7 @@ const Blog = () => {
       source: 'Forbes Brasil',
       sourceUrl: 'https://forbes.com.br',
       externalUrl: '#',
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjI1MCIgZmlsbD0iIzE4MjQzNyIvPjxyZWN0IHg9IjE2MCIgeT0iOTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI3MCIgZmlsbD0iIzAwYThmZiIgb3BhY2l0eT0iMC40Ii8+PHJlY3QgeD0iMTkwIiB5PSIxMTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI1MCIgZmlsbD0iIzYzNjZmMSIgb3BhY2l0eT0iMC40Ii8+PHJlY3QgeD0iMjIwIiB5PSIxMDAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI2MCIgZmlsbD0iIzAwYThmZiIgb3BhY2l0eT0iMC40Ii8+PHRleHQgeD0iMjAwIiB5PSIxODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjEyIiBmb250LWZhbWlseT0iQXJpYWwiPklub3Zhw6fDo288L3RleHQ+PC9zdmc+')",
+      image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&w=800&h=500&q=80",
       tags: ['Ferramentas', 'IA'],
       readTime: '6 min',
       publishDate: '25 Dez, 2023'
@@ -225,13 +225,16 @@ const Blog = () => {
               {filteredPosts.map((post) => (
                 <article
                   key={post.id}
-                  className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group hover:border-saac-blue/20"
+                  className="bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group hover:border-saac-blue/20 hover:-translate-y-1"
                 >
-                  <div
-                    className="h-48 bg-cover bg-center"
-                    style={{ backgroundImage: post.image }}
-                  >
-                    <div className="h-full w-full bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
                   
                   <div className="p-6">
