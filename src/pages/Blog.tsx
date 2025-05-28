@@ -1,7 +1,6 @@
-
 import React, { useState, useMemo } from 'react';
 import { Search, Tag, ExternalLink, Calendar, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -21,8 +20,29 @@ interface BlogPost {
 }
 
 const Blog = () => {
+  const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTag, setSelectedTag] = useState('');
+
+  const scrollToSection = (id: string) => {
+    // Se estamos na página inicial, navegar para lá primeiro
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Aguardar a navegação e então fazer scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Se já estamos na página inicial, apenas fazer scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   const blogPosts: BlogPost[] = [
     {
@@ -308,11 +328,12 @@ const Blog = () => {
             Descubra como nossa plataforma pode automatizar sua prospecção e 
             gerar leads qualificados enquanto você foca no que realmente importa.
           </p>
-          <Link to="/auth/login">
-            <Button className="bg-gradient-blue text-white px-8 py-3 text-lg rounded-full shadow-lg hover:shadow-saac-blue/30 transition-all duration-300">
-              Começar agora
-            </Button>
-          </Link>
+          <button
+            onClick={() => scrollToSection('contact')}
+            className="bg-gradient-blue text-white px-8 py-3 text-lg rounded-full shadow-lg hover:shadow-saac-blue/30 transition-all duration-300"
+          >
+            Começar agora
+          </button>
         </div>
       </section>
 
