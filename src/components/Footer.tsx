@@ -1,12 +1,27 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Footer: React.FC = () => {
+  const navigate = useNavigate();
+
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // Se estamos na página inicial, navegar para lá primeiro
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Aguardar a navegação e então fazer scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Se já estamos na página inicial, apenas fazer scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
@@ -31,9 +46,9 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-medium mb-4">Empresa</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a onClick={() => scrollToSection('about')} className="hover:text-saac-blue transition-colors cursor-pointer">
+                <button onClick={() => scrollToSection('about')} className="hover:text-saac-blue transition-colors cursor-pointer text-left">
                   Sobre nós
-                </a>
+                </button>
               </li>
               <li>
                 <a href="#" className="hover:text-saac-blue transition-colors">
@@ -41,9 +56,9 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a onClick={() => scrollToSection('contact')} className="hover:text-saac-blue transition-colors cursor-pointer">
+                <button onClick={() => scrollToSection('contact')} className="hover:text-saac-blue transition-colors cursor-pointer text-left">
                   Contato
-                </a>
+                </button>
               </li>
               <li>
                 <a href="#" className="hover:text-saac-blue transition-colors">
@@ -57,19 +72,19 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-medium mb-4">Recursos</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a onClick={() => scrollToSection('solution')} className="hover:text-saac-blue transition-colors cursor-pointer">
+                <button onClick={() => scrollToSection('solution')} className="hover:text-saac-blue transition-colors cursor-pointer text-left">
                   Solução
-                </a>
+                </button>
               </li>
               <li>
-                <a onClick={() => scrollToSection('how-it-works')} className="hover:text-saac-blue transition-colors cursor-pointer">
+                <button onClick={() => scrollToSection('how-it-works')} className="hover:text-saac-blue transition-colors cursor-pointer text-left">
                   Como funciona
-                </a>
+                </button>
               </li>
               <li>
-                <a onClick={() => scrollToSection('results')} className="hover:text-saac-blue transition-colors cursor-pointer">
+                <button onClick={() => scrollToSection('results')} className="hover:text-saac-blue transition-colors cursor-pointer text-left">
                   Resultados
-                </a>
+                </button>
               </li>
               <li>
                 <Link to="/blog" className="hover:text-saac-blue transition-colors">

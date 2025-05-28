@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Menu, X, User } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar: React.FC = () => {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -28,9 +29,22 @@ const Navbar: React.FC = () => {
   };
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    // Se estamos na página inicial, navegar para lá primeiro
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      // Aguardar a navegação e então fazer scroll
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      // Se já estamos na página inicial, apenas fazer scroll
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     setMobileMenuOpen(false);
   };
@@ -50,18 +64,18 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <a onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
+          <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Sobre
-          </a>
-          <a onClick={() => scrollToSection('solution')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
+          </button>
+          <button onClick={() => scrollToSection('solution')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Solução
-          </a>
-          <a onClick={() => scrollToSection('how-it-works')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
+          </button>
+          <button onClick={() => scrollToSection('how-it-works')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Como Funciona
-          </a>
-          <a onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
+          </button>
+          <button onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Resultados
-          </a>
+          </button>
           <Link to="/blog" className="text-gray-300 hover:text-saac-blue transition-colors">
             Blog
           </Link>
@@ -97,18 +111,18 @@ const Navbar: React.FC = () => {
         }`}
       >
         <nav className="flex flex-col space-y-4 px-6 pb-6">
-          <a onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer">
+          <button onClick={() => scrollToSection('about')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
             Sobre
-          </a>
-          <a onClick={() => scrollToSection('solution')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer">
+          </button>
+          <button onClick={() => scrollToSection('solution')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
             Solução
-          </a>
-          <a onClick={() => scrollToSection('how-it-works')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer">
+          </button>
+          <button onClick={() => scrollToSection('how-it-works')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
             Como Funciona
-          </a>
-          <a onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer">
+          </button>
+          <button onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
             Resultados
-          </a>
+          </button>
           <Link to="/blog" className="text-gray-300 hover:text-saac-blue py-2">
             Blog
           </Link>
