@@ -43,9 +43,9 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto flex justify-between items-center py-4 px-4 md:px-6">
         <div className="flex items-center">
-          <a href="#" className="text-2xl font-bold text-white">
+          <Link to="/" className="text-2xl font-bold text-white">
             <span className="text-gradient-blue">SAAC</span>.IA
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -62,9 +62,9 @@ const Navbar: React.FC = () => {
           <a onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Resultados
           </a>
-          <a onClick={() => scrollToSection('blog')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
+          <Link to="/blog" className="text-gray-300 hover:text-saac-blue transition-colors">
             Blog
-          </a>
+          </Link>
           <Link to="/client-area" className="text-gray-300 hover:text-saac-blue transition-colors">
             <span className="flex items-center">
               <User size={16} className="mr-1" />
@@ -109,9 +109,9 @@ const Navbar: React.FC = () => {
           <a onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer">
             Resultados
           </a>
-          <a onClick={() => scrollToSection('blog')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer">
+          <Link to="/blog" className="text-gray-300 hover:text-saac-blue py-2">
             Blog
-          </a>
+          </Link>
           <Link to="/client-area" className="text-gray-300 hover:text-saac-blue py-2">
             <span className="flex items-center">
               <User size={16} className="mr-1" />

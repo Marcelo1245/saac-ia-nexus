@@ -17,10 +17,10 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-10">
           <div className="space-y-4">
-            <a href="#" className="text-xl font-bold">
+            <Link to="/" className="text-xl font-bold">
               <span className="text-gradient-blue">SAAC</span>
               <span className="text-white">.IA</span>
-            </a>
+            </Link>
             
             <p className="text-sm">
               Sistema Automatizado de Alcance e Prospecção Inteligente com IA que automatiza a prospecção de leads em massa.
@@ -72,9 +72,9 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a onClick={() => scrollToSection('blog')} className="hover:text-saac-blue transition-colors cursor-pointer">
+                <Link to="/blog" className="hover:text-saac-blue transition-colors">
                   Blog
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -83,14 +83,14 @@ const Footer: React.FC = () => {
             <h4 className="text-white font-medium mb-4">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a 
-                  href="/terms" 
+                <Link 
+                  to="/terms" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="hover:text-saac-blue transition-colors"
                 >
                   Termos de serviço
-                </a>
+                </Link>
               </li>
               <li>
                 <Link 
