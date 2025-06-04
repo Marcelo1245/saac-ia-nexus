@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Calendar, Users, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const BlogSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -119,27 +120,29 @@ const BlogSection: React.FC = () => {
                   {post.excerpt}
                 </p>
                 
-                <a 
-                  href="#" 
+                <Link 
+                  to="/blog" 
                   className="inline-flex items-center text-saac-blue text-sm font-medium hover:underline"
                 >
                   Leia mais
                   <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           ))}
         </div>
         
         <div className="text-center mt-12">
-          <Button 
-            variant="outline" 
-            className="border-saac-blue text-saac-blue hover:bg-saac-blue/20"
-          >
-            Ver todos os artigos
-          </Button>
+          <Link to="/blog">
+            <Button 
+              variant="outline" 
+              className="border-saac-blue text-saac-blue hover:bg-saac-blue/20"
+            >
+              Ver todos os artigos
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
