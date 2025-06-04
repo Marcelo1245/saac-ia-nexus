@@ -61,7 +61,7 @@ const ResultsSection: React.FC = () => {
     },
     {
       icon: TrendingUp,
-      value: '4.5x',
+      value: '3x',
       label: 'ROI médio',
       description: 'Retorno médio sobre o investimento nos primeiros seis meses de implementação.'
     }
