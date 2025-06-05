@@ -77,6 +77,12 @@ const ContactSection: React.FC = () => {
     }
   };
 
+  const handleWhatsAppRedirect = () => {
+    const message = encodeURIComponent("Olá, vi sobre a SAAC.IA e me interessei em como automatizar meu processo de agendamento de reuniões, gostaria de saber mais");
+    const whatsappUrl = `https://wa.me/5548998159763?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
     <section
       id="contact"
@@ -252,9 +258,12 @@ const ContactSection: React.FC = () => {
                     </div>
                     <div>
                       <h4 className="text-white font-medium mb-1">WhatsApp</h4>
-                      <a href="https://wa.me/5548998159763" className="text-gray-300 hover:text-saac-blue transition-colors">
+                      <button 
+                        onClick={handleWhatsAppRedirect}
+                        className="text-gray-300 hover:text-saac-blue transition-colors cursor-pointer"
+                      >
                         Iniciar conversa
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
