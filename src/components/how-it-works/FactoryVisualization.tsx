@@ -10,48 +10,8 @@ const FactoryVisualization: React.FC<FactoryVisualizationProps> = ({
   onLoadVoiceflowWidget
 }) => {
   const handleDemoClick = () => {
-    console.log('Demo button clicked in FactoryVisualization');
-    
-    // Remove any existing Voiceflow script to prevent conflicts
-    const existingScript = document.getElementById('voiceflow-script-factory');
-    if (existingScript) {
-      existingScript.remove();
-    }
-    
-    // Clear any existing Voiceflow instances
-    // @ts-ignore
-    if (window.voiceflow?.chat?.destroy) {
-      // @ts-ignore
-      window.voiceflow.chat.destroy();
-    }
-    
-    // Load the script fresh
-    const script = document.createElement('script');
-    script.id = 'voiceflow-script-factory';
-    script.type = 'text/javascript';
-    script.onload = () => {
-      console.log('Voiceflow script loaded successfully');
-      // @ts-ignore
-      if (window.voiceflow?.chat) {
-        // @ts-ignore
-        window.voiceflow.chat.load({
-          verify: { projectID: '67d04783ad9ed2f668b04618' },
-          url: 'https://general-runtime.voiceflow.com/',
-          versionID: 'production',
-          voice: {
-            url: "https://runtime-api.voiceflow.com/"
-          },
-          render: {
-            mode: 'overlay'
-          }
-        });
-      }
-    };
-    script.onerror = () => {
-      console.error('Failed to load Voiceflow script');
-    };
-    script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-    document.head.appendChild(script);
+    console.log('Demo button clicked in FactoryVisualization - using shared function');
+    onLoadVoiceflowWidget();
   };
 
   return (
