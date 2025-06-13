@@ -47,14 +47,25 @@ const HowItWorksSection: React.FC = () => {
   }, [isVisible, isPaused]);
   
   const loadVoiceflowWidget = () => {
-    // Add Voiceflow script only if it hasn't been loaded yet
-    if (!document.getElementById('voiceflow-script')) {
-      const script = document.createElement('script');
-      script.id = 'voiceflow-script';
-      script.type = 'text/javascript';
-      script.onload = () => {
+    // Create a unique script ID for this component
+    const scriptId = 'voiceflow-script-how-it-works';
+    
+    // Remove any existing script to avoid conflicts
+    const existingScript = document.getElementById(scriptId);
+    if (existingScript) {
+      existingScript.remove();
+    }
+    
+    // Create and load the script
+    const script = document.createElement('script');
+    script.id = scriptId;
+    script.type = 'text/javascript';
+    script.onload = () => {
+      console.log('Voiceflow script loaded in HowItWorksSection');
+      // @ts-ignore
+      if (window.voiceflow?.chat) {
         // @ts-ignore
-        window.voiceflow?.chat.load({
+        window.voiceflow.chat.load({
           verify: { projectID: '67d04783ad9ed2f668b04618' },
           url: 'https://general-runtime.voiceflow.com/',
           versionID: 'production',
@@ -65,24 +76,13 @@ const HowItWorksSection: React.FC = () => {
             mode: 'overlay'
           }
         });
-      };
-      script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-      document.head.appendChild(script);
-    } else {
-      // If script already loaded, just initialize the widget
-      // @ts-ignore
-      window.voiceflow?.chat.load({
-        verify: { projectID: '67d04783ad9ed2f668b04618' },
-        url: 'https://general-runtime.voiceflow.com/',
-        versionID: 'production',
-        voice: {
-          url: "https://runtime-api.voiceflow.com/"
-        },
-        render: {
-          mode: 'overlay'
-        }
-      });
-    }
+      }
+    };
+    script.onerror = () => {
+      console.error('Failed to load Voiceflow script');
+    };
+    script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+    document.head.appendChild(script);
   };
   
   const steps = [
@@ -328,7 +328,10 @@ const HowItWorksSection: React.FC = () => {
               </p>
               <Button 
                 className="bg-gradient-blue hover:opacity-90 text-white font-medium py-3 px-6 rounded-md inline-flex items-center transition-all"
-                onClick={loadVoiceflowWidget}
+                onClick={() => {
+                  console.log('Demo button clicked in HowItWorksSection');
+                  loadVoiceflowWidget();
+                }}
               >
                 Solicitar demonstração
                 <ArrowRight className="ml-2 h-4 w-4" />
