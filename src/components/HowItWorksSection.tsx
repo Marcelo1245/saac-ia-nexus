@@ -46,6 +46,45 @@ const HowItWorksSection: React.FC = () => {
     return () => clearInterval(interval);
   }, [isVisible, isPaused]);
   
+  const loadVoiceflowWidget = () => {
+    // Add Voiceflow script only if it hasn't been loaded yet
+    if (!document.getElementById('voiceflow-script')) {
+      const script = document.createElement('script');
+      script.id = 'voiceflow-script';
+      script.type = 'text/javascript';
+      script.onload = () => {
+        // @ts-ignore
+        window.voiceflow?.chat.load({
+          verify: { projectID: '67d04783ad9ed2f668b04618' },
+          url: 'https://general-runtime.voiceflow.com/',
+          versionID: 'production',
+          voice: {
+            url: "https://runtime-api.voiceflow.com/"
+          },
+          render: {
+            mode: 'overlay'
+          }
+        });
+      };
+      script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+      document.head.appendChild(script);
+    } else {
+      // If script already loaded, just initialize the widget
+      // @ts-ignore
+      window.voiceflow?.chat.load({
+        verify: { projectID: '67d04783ad9ed2f668b04618' },
+        url: 'https://general-runtime.voiceflow.com/',
+        versionID: 'production',
+        voice: {
+          url: "https://runtime-api.voiceflow.com/"
+        },
+        render: {
+          mode: 'overlay'
+        }
+      });
+    }
+  };
+  
   const steps = [
     {
       title: "Integração e Configuração",
@@ -287,7 +326,10 @@ const HowItWorksSection: React.FC = () => {
               <p className="text-gray-300 mb-6">
                 Nossa demonstração interativa mostra como a plataforma funciona na prática, capturando, qualificando e agendando reuniões automaticamente, como uma linha de produção inteligente que opera 24/7.
               </p>
-              <Button className="bg-gradient-blue hover:opacity-90 text-white font-medium py-3 px-6 rounded-md inline-flex items-center transition-all">
+              <Button 
+                className="bg-gradient-blue hover:opacity-90 text-white font-medium py-3 px-6 rounded-md inline-flex items-center transition-all"
+                onClick={loadVoiceflowWidget}
+              >
                 Solicitar demonstração
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
