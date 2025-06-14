@@ -1,12 +1,13 @@
 
 import React, { useRef, useEffect, useState } from 'react';
-import { Calendar, Users, TrendingUp } from 'lucide-react';
+import { Calendar, Users, TrendingUp, Brain, Target, Zap, BarChart3, Lightbulb } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const BlogSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [displayedPosts, setDisplayedPosts] = useState<any[]>([]);
   
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -32,7 +33,7 @@ const BlogSection: React.FC = () => {
     };
   }, []);
   
-  const blogPosts = [
+  const allBlogPosts = [
     {
       title: "Como a IA está revolucionando o processo de vendas B2B",
       excerpt: "Descubra como as empresas estão utilizando inteligência artificial para automatizar e otimizar suas estratégias de prospecção.",
@@ -47,7 +48,7 @@ const BlogSection: React.FC = () => {
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=500&q=80",
       date: "03 Mar, 2023",
       category: "Métricas de Vendas",
-      icon: Calendar
+      icon: BarChart3
     },
     {
       title: "O papel do vendedor na era da automação: como se adaptar e prosperar",
@@ -56,8 +57,60 @@ const BlogSection: React.FC = () => {
       date: "22 Fev, 2023",
       category: "Carreira em Vendas",
       icon: Users
+    },
+    {
+      title: "Machine Learning aplicado à qualificação de leads: o futuro chegou",
+      excerpt: "Como algoritmos inteligentes estão transformando a forma de identificar e priorizar oportunidades de negócio.",
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "15 Mai, 2023",
+      category: "Machine Learning",
+      icon: Brain
+    },
+    {
+      title: "Personalização em massa: como criar campanhas únicas para milhares de prospects",
+      excerpt: "Estratégias avançadas para personalizar abordagens comerciais em escala sem perder a autenticidade.",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "28 Jan, 2023",
+      category: "Estratégia Digital",
+      icon: Target
+    },
+    {
+      title: "Automação de follow-up: como nunca mais perder um lead qualificado",
+      excerpt: "Técnicas e ferramentas para criar sequências de acompanhamento que convertem prospects em clientes.",
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "10 Jun, 2023",
+      category: "Automação",
+      icon: Zap
+    },
+    {
+      title: "ROI em prospecção: como calcular o retorno real dos seus investimentos",
+      excerpt: "Metodologias práticas para mensurar e otimizar o retorno sobre investimento em estratégias de prospecção.",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "05 Abr, 2023",
+      category: "ROI & Analytics",
+      icon: Calendar
+    },
+    {
+      title: "Tendências 2024: o que esperar do mercado de sales tech",
+      excerpt: "Análise das principais inovações e mudanças que vão impactar o setor de tecnologia para vendas no próximo ano.",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "20 Dez, 2023",
+      category: "Tendências",
+      icon: Lightbulb
     }
   ];
+
+  // Função para selecionar 3 posts aleatórios
+  const getRandomPosts = (posts: any[], count: number = 3) => {
+    const shuffled = [...posts].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, count);
+  };
+
+  // Selecionar posts aleatórios na inicialização
+  useEffect(() => {
+    const randomPosts = getRandomPosts(allBlogPosts);
+    setDisplayedPosts(randomPosts);
+  }, []);
 
   return (
     <section
@@ -87,9 +140,9 @@ const BlogSection: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {blogPosts.map((post, index) => (
+          {displayedPosts.map((post, index) => (
             <div 
-              key={index}
+              key={`${post.title}-${index}`}
               className={`glass-card rounded-xl overflow-hidden transition-all duration-700 group hover:border-saac-blue/30 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
               }`}
