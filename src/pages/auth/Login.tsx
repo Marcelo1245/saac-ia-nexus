@@ -79,7 +79,7 @@ const Login: React.FC = () => {
       <form onSubmit={handleLogin}>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="text-white">Email</Label>
             <div className="relative">
               <Input
                 id="email"
@@ -87,17 +87,17 @@ const Login: React.FC = () => {
                 placeholder="seu@empresa.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="bg-gray-700 pl-10"
+                className="bg-gray-700 pl-10 text-white placeholder:text-gray-300"
                 disabled={isLoading}
               />
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Mail className="h-4 w-4 text-gray-400" />
+                <Mail className="h-4 w-4 text-gray-300" />
               </div>
             </div>
           </div>
           
           <div>
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password" className="text-white">Senha</Label>
             <div className="relative">
               <Input
                 id="password"
@@ -105,17 +105,17 @@ const Login: React.FC = () => {
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="bg-gray-700 pl-10"
+                className="bg-gray-700 pl-10 text-white placeholder:text-gray-300"
                 disabled={isLoading}
               />
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Lock className="h-4 w-4 text-gray-400" />
+                <Lock className="h-4 w-4 text-gray-300" />
               </div>
             </div>
           </div>
           
           <div>
-            <Label htmlFor="token">Token de Acesso</Label>
+            <Label htmlFor="token" className="text-white">Token de Acesso</Label>
             <div className="relative">
               <Input
                 id="token"
@@ -123,14 +123,14 @@ const Login: React.FC = () => {
                 placeholder="Digite o token de acesso"
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
-                className="bg-gray-700 pl-10"
+                className="bg-gray-700 pl-10 text-white placeholder:text-gray-300"
                 disabled={isLoading}
               />
               <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                <Key className="h-4 w-4 text-gray-400" />
+                <Key className="h-4 w-4 text-gray-300" />
               </div>
             </div>
-            <p className="text-xs text-gray-400 mt-1">
+            <p className="text-xs text-white mt-1">
               O token é necessário para acessar a área do cliente. 
               Solicite o seu com a equipe de suporte.
             </p>
@@ -146,7 +146,7 @@ const Login: React.FC = () => {
         </div>
       </form>
       
-      <p className="mt-6 text-center text-sm text-gray-400">
+      <p className="mt-6 text-center text-sm text-white">
         Não tem uma conta?{' '}
         <Link to="/auth/register" className="text-saac-blue hover:underline">
           Solicite acesso
@@ -154,7 +154,7 @@ const Login: React.FC = () => {
       </p>
 
       <div className="mt-4 pt-4 border-t border-gray-700">
-        <div className="flex items-center justify-center text-xs text-gray-400">
+        <div className="flex items-center justify-center text-xs text-white">
           <Shield className="h-3 w-3 mr-1 text-green-400" />
           <span>Área segura com criptografia SSL/TLS</span>
         </div>
