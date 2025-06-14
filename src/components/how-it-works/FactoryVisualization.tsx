@@ -10,8 +10,44 @@ const FactoryVisualization: React.FC<FactoryVisualizationProps> = ({
   onLoadVoiceflowWidget
 }) => {
   const handleDemoClick = () => {
-    console.log('Demo button clicked in FactoryVisualization - using shared function');
-    onLoadVoiceflowWidget();
+    console.log('Demo button clicked in FactoryVisualization - loading hero-style agent');
+    
+    // Use the same logic as HeroSection for consistency
+    if (!document.getElementById('voiceflow-script-hero')) {
+      const script = document.createElement('script');
+      script.id = 'voiceflow-script-hero';
+      script.type = 'text/javascript';
+      script.onload = () => {
+        // @ts-ignore
+        window.voiceflow?.chat.load({
+          verify: { projectID: '67d04783ad9ed2f668b04618' },
+          url: 'https://general-runtime.voiceflow.com/',
+          versionID: 'production',
+          voice: {
+            url: "https://runtime-api.voiceflow.com/"
+          },
+          render: {
+            mode: 'overlay'
+          }
+        });
+      };
+      script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
+      document.head.appendChild(script);
+    } else {
+      // If script already loaded, just initialize the widget
+      // @ts-ignore
+      window.voiceflow?.chat.load({
+        verify: { projectID: '67d04783ad9ed2f668b04618' },
+        url: 'https://general-runtime.voiceflow.com/',
+        versionID: 'production',
+        voice: {
+          url: "https://runtime-api.voiceflow.com/"
+        },
+        render: {
+          mode: 'overlay'
+        }
+      });
+    }
   };
 
   return (
