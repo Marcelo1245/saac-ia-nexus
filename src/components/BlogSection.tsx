@@ -36,7 +36,7 @@ const BlogSection: React.FC = () => {
     {
       title: "Como a IA está revolucionando o processo de vendas B2B",
       excerpt: "Descubra como as empresas estão utilizando inteligência artificial para automatizar e otimizar suas estratégias de prospecção.",
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzFhMWEyZSIvPjxjaXJjbGUgY3g9IjQwMCIgY3k9IjI1MCIgcj0iMTUwIiBmaWxsPSIjMDBhOGZmIiBvcGFjaXR5PSIwLjEiLz48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&h=500&q=80",
       date: "18 Abr, 2023",
       category: "Inteligência Artificial",
       icon: TrendingUp
@@ -44,7 +44,7 @@ const BlogSection: React.FC = () => {
     {
       title: "7 métricas essenciais para avaliar a eficiência do seu funil de vendas",
       excerpt: "Conheça os indicadores mais importantes para medir o desempenho da sua estratégia de captação e conversão de leads.",
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzFhMWEyZSIvPjxyZWN0IHg9IjEwMCIgeT0iMTUwIiB3aWR0aD0iNjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzAwYThmZiIgb3BhY2l0eT0iMC4xIi8+PC9zdmc+')",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=500&q=80",
       date: "03 Mar, 2023",
       category: "Métricas de Vendas",
       icon: Calendar
@@ -52,7 +52,7 @@ const BlogSection: React.FC = () => {
     {
       title: "O papel do vendedor na era da automação: como se adaptar e prosperar",
       excerpt: "Entenda como os profissionais de vendas podem se reinventar e aproveitar ao máximo as ferramentas de automação comercial.",
-      image: "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iODAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iIzFhMWEyZSIvPjxwYXRoIGQ9Ik0xMDAsMTUwIEM0MDAsNTAgNTAwLDM1MCA3MDAsNDAwIiBzdHJva2U9IiMwMGE4ZmYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWRhc2hhcnJheT0iNSw1IiBvcGFjaXR5PSIwLjIiLz48L3N2Zz4=')",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&h=500&q=80",
       date: "22 Fev, 2023",
       category: "Carreira em Vendas",
       icon: Users
@@ -95,11 +95,14 @@ const BlogSection: React.FC = () => {
               }`}
               style={{ transitionDelay: `${300 + index * 200}ms` }}
             >
-              <div 
-                className="h-48 bg-cover bg-center" 
-                style={{ backgroundImage: post.image }}
-              >
-                <div className="h-full w-full bg-gradient-to-t from-saac-dark to-transparent"></div>
+              <div className="relative h-48 overflow-hidden">
+                <img 
+                  src={post.image} 
+                  alt={post.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-saac-dark/80 to-transparent"></div>
               </div>
               
               <div className="p-6">
