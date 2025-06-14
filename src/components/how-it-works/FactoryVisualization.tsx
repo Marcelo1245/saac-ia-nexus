@@ -16,9 +16,10 @@ const FactoryVisualization: React.FC<FactoryVisualizationProps> = ({
     
     setShowEmbeddedAgent(true);
     
-    // Use the exact code pattern provided by the user
+    // Use the exact code pattern provided by the user with proper TypeScript handling
     (function(d, t) {
-      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      var v = d.createElement(t) as HTMLScriptElement;
+      var s = d.getElementsByTagName(t)[0];
       v.onload = function() {
         // @ts-ignore
         window.voiceflow.chat.load({
@@ -36,7 +37,7 @@ const FactoryVisualization: React.FC<FactoryVisualizationProps> = ({
       }
       v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; 
       v.type = "text/javascript"; 
-      s.parentNode.insertBefore(v, s);
+      s.parentNode!.insertBefore(v, s);
     })(document, 'script');
   };
 
