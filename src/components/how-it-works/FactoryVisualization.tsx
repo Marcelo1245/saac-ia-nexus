@@ -10,41 +10,44 @@ const FactoryVisualization: React.FC<FactoryVisualizationProps> = ({
   onLoadVoiceflowWidget
 }) => {
   const handleDemoClick = () => {
-    console.log('Demo button clicked in FactoryVisualization - loading hero-style agent');
+    console.log('Demo button clicked in FactoryVisualization - loading embedded agent');
     
-    // Use the same logic as HeroSection for consistency
-    if (!document.getElementById('voiceflow-script-hero')) {
+    // Use the new embedded widget code
+    const existingScript = document.querySelector('script[src="https://cdn.voiceflow.com/widget-next/bundle.mjs"]');
+    if (!existingScript) {
       const script = document.createElement('script');
-      script.id = 'voiceflow-script-hero';
-      script.type = 'text/javascript';
-      script.onload = () => {
+      script.onload = function() {
         // @ts-ignore
-        window.voiceflow?.chat.load({
+        window.voiceflow.chat.load({
           verify: { projectID: '67d04783ad9ed2f668b04618' },
-          url: 'https://general-runtime.voiceflow.com/',
+          url: 'https://general-runtime.voiceflow.com',
           versionID: 'production',
           voice: {
-            url: "https://runtime-api.voiceflow.com/"
+            url: "https://runtime-api.voiceflow.com"
           },
           render: {
-            mode: 'overlay'
+            mode: 'embedded',
+            target: document.getElementById('voiceflow-container')
           }
         });
       };
       script.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs";
-      document.head.appendChild(script);
+      script.type = "text/javascript";
+      const firstScript = document.getElementsByTagName('script')[0];
+      firstScript.parentNode.insertBefore(script, firstScript);
     } else {
       // If script already loaded, just initialize the widget
       // @ts-ignore
-      window.voiceflow?.chat.load({
+      window.voiceflow.chat.load({
         verify: { projectID: '67d04783ad9ed2f668b04618' },
-        url: 'https://general-runtime.voiceflow.com/',
+        url: 'https://general-runtime.voiceflow.com',
         versionID: 'production',
         voice: {
-          url: "https://runtime-api.voiceflow.com/"
+          url: "https://runtime-api.voiceflow.com"
         },
         render: {
-          mode: 'overlay'
+          mode: 'embedded',
+          target: document.getElementById('voiceflow-container')
         }
       });
     }
@@ -75,6 +78,9 @@ const FactoryVisualization: React.FC<FactoryVisualizationProps> = ({
         
         <div className="md:w-1/2">
           <div className="relative">
+            {/* Voiceflow embedded container */}
+            <div id="voiceflow-container" className="hidden"></div>
+            
             <div className="factory-visualization w-full h-64 bg-saac-grafite/50 rounded-lg p-4 border border-gray-700 relative overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* Factory assembly line animation based on current step */}
