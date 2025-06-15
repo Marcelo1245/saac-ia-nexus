@@ -1,8 +1,11 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ProspectingFilters } from '@/types/prospecting';
+import { Plus } from 'lucide-react';
 
 interface CompanySectionProps {
   filters: Partial<ProspectingFilters>;
@@ -69,6 +72,8 @@ const CompanySection: React.FC<CompanySectionProps> = ({
   toggleFilterValue,
   isValueSelected
 }) => {
+  const [customIndustry, setCustomIndustry] = useState<string>("");
+
   const handleCompanyTypeSelect = (type: string) => {
     toggleFilterValue('customTags', `companyType:${type}`);
   };
@@ -79,6 +84,13 @@ const CompanySection: React.FC<CompanySectionProps> = ({
 
   const handleIndustrySelect = (industry: string) => {
     toggleFilterValue('industries', industry);
+  };
+
+  const handleAddCustomIndustry = () => {
+    if (customIndustry.trim()) {
+      toggleFilterValue('industries', customIndustry.trim());
+      setCustomIndustry("");
+    }
   };
 
   return (
@@ -135,6 +147,29 @@ const CompanySection: React.FC<CompanySectionProps> = ({
               ))}
             </SelectContent>
           </Select>
+          
+          <div className="mt-3 space-y-2">
+            <Label className="text-sm font-medium text-gray-700">Setor personalizado</Label>
+            <div className="flex gap-2">
+              <Input
+                placeholder="Digite um setor não listado..."
+                value={customIndustry}
+                onChange={(e) => setCustomIndustry(e.target.value)}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    handleAddCustomIndustry();
+                  }
+                }}
+              />
+              <Button 
+                size="sm" 
+                onClick={handleAddCustomIndustry}
+                disabled={!customIndustry.trim()}
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

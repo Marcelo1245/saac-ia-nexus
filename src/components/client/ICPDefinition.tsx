@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -136,7 +135,7 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
   };
 
   return (
-    <div className="space-y-6 pt-8">
+    <div className="space-y-6 pt-12">
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Defina o ICP (Perfil de Cliente Ideal) para segmentação de leads
@@ -224,7 +223,7 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
       </Card>
 
       {/* Ações */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center pb-12">
         <div className="text-sm text-gray-600">
           {getAllSelectedFilters().length > 0 && (
             <span>

@@ -15,7 +15,9 @@ interface LocationSectionProps {
 const countries = [
   "Brasil", "Estados Unidos", "Canadá", "Reino Unido", "Alemanha", "França", 
   "Espanha", "Itália", "Portugal", "Argentina", "Chile", "Colômbia", "México",
-  "Peru", "Uruguai", "Holanda", "Bélgica", "Suíça", "Áustria", "Austrália", "Japão"
+  "Peru", "Uruguai", "Holanda", "Bélgica", "Suíça", "Áustria", "Austrália", "Japão",
+  "China", "Coreia do Sul", "Índia", "Singapura", "Noruega", "Suécia", "Dinamarca",
+  "Finlândia", "Irlanda", "Polônia", "República Tcheca", "Hungria", "Grécia", "Turquia"
 ];
 
 const brazilStates = [
@@ -37,18 +39,44 @@ const usStates = [
   "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"
 ];
 
-const brazilMajorCities = [
-  "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília", "Salvador", "Fortaleza",
-  "Manaus", "Curitiba", "Recife", "Porto Alegre", "Belém", "Goiânia", "Guarulhos",
-  "Campinas", "São Luís", "São Gonçalo", "Maceió", "Duque de Caxias", "Natal", "Teresina"
-];
-
-const usMajorCities = [
-  "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
-  "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
-  "Fort Worth", "Columbus", "Charlotte", "San Francisco", "Indianapolis", "Seattle",
-  "Denver", "Washington", "Boston", "Detroit", "Nashville", "Memphis", "Portland"
-];
+// Expandindo para incluir cidades de vários países
+const globalCities = {
+  "Brasil": [
+    "São Paulo", "Rio de Janeiro", "Belo Horizonte", "Brasília", "Salvador", "Fortaleza",
+    "Manaus", "Curitiba", "Recife", "Porto Alegre", "Belém", "Goiânia", "Guarulhos",
+    "Campinas", "São Luís", "São Gonçalo", "Maceió", "Duque de Caxias", "Natal", "Teresina"
+  ],
+  "Estados Unidos": [
+    "New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "Philadelphia",
+    "San Antonio", "San Diego", "Dallas", "San Jose", "Austin", "Jacksonville",
+    "Fort Worth", "Columbus", "Charlotte", "San Francisco", "Indianapolis", "Seattle",
+    "Denver", "Washington", "Boston", "Detroit", "Nashville", "Memphis", "Portland"
+  ],
+  "Reino Unido": [
+    "Londres", "Manchester", "Birmingham", "Leeds", "Glasgow", "Sheffield", "Bradford",
+    "Liverpool", "Edinburgh", "Bristol", "Cardiff", "Coventry", "Leicester", "Nottingham"
+  ],
+  "Alemanha": [
+    "Berlim", "Hamburgo", "Munique", "Colônia", "Frankfurt", "Stuttgart", "Düsseldorf",
+    "Dortmund", "Essen", "Leipzig", "Bremen", "Dresden", "Hannover", "Nuremberg"
+  ],
+  "França": [
+    "Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Strasbourg",
+    "Montpellier", "Bordeaux", "Lille", "Rennes", "Reims", "Le Havre", "Saint-Étienne"
+  ],
+  "Canadá": [
+    "Toronto", "Montreal", "Vancouver", "Calgary", "Edmonton", "Ottawa", "Winnipeg",
+    "Quebec City", "Hamilton", "Kitchener", "London", "Victoria", "Halifax", "Saskatoon"
+  ],
+  "Austrália": [
+    "Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast", "Newcastle",
+    "Canberra", "Sunshine Coast", "Wollongong", "Hobart", "Geelong", "Townsville", "Cairns"
+  ],
+  "Espanha": [
+    "Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia",
+    "Palma", "Las Palmas", "Bilbao", "Alicante", "Córdoba", "Valladolid", "Vigo"
+  ]
+};
 
 const LocationSection: React.FC<LocationSectionProps> = ({
   filters,
@@ -71,14 +99,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({
   };
 
   const getCitiesForCountry = (country: string) => {
-    switch (country) {
-      case "Brasil":
-        return brazilMajorCities;
-      case "Estados Unidos":
-        return usMajorCities;
-      default:
-        return [];
-    }
+    return globalCities[country as keyof typeof globalCities] || [];
   };
 
   const handleCountrySelect = (country: string) => {
@@ -88,6 +109,11 @@ const LocationSection: React.FC<LocationSectionProps> = ({
 
   const handleStateSelect = (state: string) => {
     toggleFilterValue('states', state);
+  };
+
+  const handleCitySelect = (city: string) => {
+    toggleFilterValue('cities', city);
+    setCitySearch("");
   };
 
   const filteredCities = getCitiesForCountry(selectedCountry).filter(city =>
@@ -117,7 +143,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({
         <div>
           <Label className="text-base font-medium">Região/Estado</Label>
           <p className="text-sm text-gray-600 mb-2">Estados ou regiões específicas</p>
-          {selectedCountry ? (
+          {selectedCountry && getStatesForCountry(selectedCountry).length > 0 ? (
             <Select onValueChange={handleStateSelect}>
               <SelectTrigger>
                 <SelectValue placeholder="Selecione um estado..." />
@@ -132,7 +158,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({
             </Select>
           ) : (
             <div className="p-3 border rounded-md bg-gray-50 text-gray-500 text-sm">
-              Selecione um país primeiro
+              {selectedCountry ? "Estados não disponíveis para este país" : "Selecione um país primeiro"}
             </div>
           )}
         </div>
@@ -141,7 +167,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({
       <div className="space-y-4">
         <div>
           <Label className="text-base font-medium">Cidade</Label>
-          <p className="text-sm text-gray-600 mb-2">Busque cidades específicas</p>
+          <p className="text-sm text-gray-600 mb-2">Busque cidades específicas globalmente</p>
           <Input
             placeholder="Digite o nome da cidade..."
             value={citySearch}
@@ -153,10 +179,7 @@ const LocationSection: React.FC<LocationSectionProps> = ({
                 <div 
                   key={city}
                   className="p-2 hover:bg-gray-100 cursor-pointer text-sm border-b last:border-b-0"
-                  onClick={() => {
-                    toggleFilterValue('cities', city);
-                    setCitySearch("");
-                  }}
+                  onClick={() => handleCitySelect(city)}
                 >
                   {city}
                 </div>
@@ -166,6 +189,11 @@ const LocationSection: React.FC<LocationSectionProps> = ({
                   Nenhuma cidade encontrada
                 </div>
               )}
+            </div>
+          )}
+          {!selectedCountry && citySearch && (
+            <div className="mt-2 p-2 border rounded-md bg-gray-50 text-gray-500 text-sm">
+              Selecione um país primeiro para buscar cidades
             </div>
           )}
         </div>
