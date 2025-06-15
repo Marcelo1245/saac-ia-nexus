@@ -135,34 +135,34 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
   };
 
   return (
-    <div className="space-y-6 pt-12">
+    <div className="space-y-8 pt-16">
       <div className="text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <h1 className="text-4xl font-bold premium-title mb-4">
           Defina o ICP (Perfil de Cliente Ideal) para segmentação de leads
         </h1>
-        <p className="text-gray-600 text-lg">
+        <p className="premium-text text-xl">
           Configure os critérios para encontrar seus clientes ideais
         </p>
       </div>
 
       {/* Filtros Selecionados */}
       {getAllSelectedFilters().length > 0 && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Filtros Aplicados</CardTitle>
+        <Card className="premium-card rounded-xl border-0 shadow-lg">
+          <CardHeader className="pb-4">
+            <CardTitle className="text-xl premium-title">Filtros Aplicados</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-3">
               {getAllSelectedFilters().map((filter, index) => (
                 <Badge 
                   key={index}
                   variant="secondary" 
-                  className="px-3 py-1 text-sm flex items-center gap-2"
+                  className="px-4 py-2 text-sm flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white border-0 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
                 >
                   {filter.displayValue}
                   <button
                     onClick={() => removeFilter(filter.category, filter.value)}
-                    className="text-gray-500 hover:text-gray-700 ml-1"
+                    className="text-white/80 hover:text-white ml-1 text-lg font-medium"
                   >
                     ×
                   </button>
@@ -174,25 +174,34 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
       )}
 
       {/* Seções de Filtros */}
-      <Card>
-        <CardContent className="p-6">
+      <Card className="premium-card rounded-xl border-0 shadow-xl">
+        <CardContent className="p-8">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="location" className="flex items-center gap-2">
+            <TabsList className="grid w-full grid-cols-3 bg-gradient-to-r from-slate-100 to-slate-200 p-1 rounded-lg shadow-inner">
+              <TabsTrigger 
+                value="location" 
+                className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:shadow-md rounded-md premium-text font-medium"
+              >
                 <MapPin className="h-4 w-4" />
                 Localização
               </TabsTrigger>
-              <TabsTrigger value="company" className="flex items-center gap-2">
+              <TabsTrigger 
+                value="company" 
+                className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:shadow-md rounded-md premium-text font-medium"
+              >
                 <Building className="h-4 w-4" />
                 Empresa
               </TabsTrigger>
-              <TabsTrigger value="role" className="flex items-center gap-2">
+              <TabsTrigger 
+                value="role" 
+                className="flex items-center gap-2 data-[state=active]:bg-white data-[state=active]:shadow-md rounded-md premium-text font-medium"
+              >
                 <Users className="h-4 w-4" />
                 Cargo/Função
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="location" className="space-y-6 mt-6">
+            <TabsContent value="location" className="space-y-6 mt-8">
               <LocationSection 
                 filters={filters}
                 updateFilter={updateFilter}
@@ -201,7 +210,7 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
               />
             </TabsContent>
 
-            <TabsContent value="company" className="space-y-6 mt-6">
+            <TabsContent value="company" className="space-y-6 mt-8">
               <CompanySection 
                 filters={filters}
                 updateFilter={updateFilter}
@@ -210,7 +219,7 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
               />
             </TabsContent>
 
-            <TabsContent value="role" className="space-y-6 mt-6">
+            <TabsContent value="role" className="space-y-6 mt-8">
               <RoleSection 
                 filters={filters}
                 updateFilter={updateFilter}
@@ -223,21 +232,28 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
       </Card>
 
       {/* Ações */}
-      <div className="flex justify-between items-center pb-12">
-        <div className="text-sm text-gray-600">
+      <div className="flex justify-between items-center pb-16">
+        <div className="text-sm premium-text">
           {getAllSelectedFilters().length > 0 && (
-            <span>
+            <span className="font-medium">
               {getAllSelectedFilters().length} filtro(s) aplicado(s)
               {estimatedLeads > 0 && ` • ~${estimatedLeads.toLocaleString()} leads estimados`}
             </span>
           )}
         </div>
         
-        <div className="flex gap-3">
-          <Button variant="outline" onClick={handleSendICP}>
+        <div className="flex gap-4">
+          <Button 
+            variant="outline" 
+            onClick={handleSendICP}
+            className="px-6 py-2 border-2 border-slate-300 premium-text hover:bg-slate-50 hover:border-slate-400 transition-all duration-200 rounded-lg shadow-sm font-medium"
+          >
             Salvar Configuração
           </Button>
-          <Button onClick={handleSendICP} className="bg-blue-600 hover:bg-blue-700">
+          <Button 
+            onClick={handleSendICP} 
+            className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 font-medium"
+          >
             Enviar ICP
           </Button>
         </div>

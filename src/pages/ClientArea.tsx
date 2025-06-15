@@ -27,21 +27,27 @@ const ClientArea = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 max-w-6xl">
-      <PageHeader 
-        title="Área do Cliente"
-        onReturnHome={handleReturnHome}
-      />
-      
-      <Card className="border-0 shadow-none">
-        <CardContent className="p-0">
-          <ICPDefinition
-            onSaveConfiguration={handleSaveConfiguration}
-            onPreview={handlePreviewClick}
-            estimatedLeads={estimatedLeads}
-          />
-        </CardContent>
-      </Card>
+    <div className="min-h-screen premium-gradient font-montserrat">
+      <div className="container mx-auto p-8 max-w-6xl">
+        <div className="premium-card rounded-2xl shadow-2xl overflow-hidden">
+          <div className="p-8">
+            <PageHeader 
+              title="Área do Cliente"
+              onReturnHome={handleReturnHome}
+            />
+            
+            <Card className="border-0 shadow-none bg-transparent">
+              <CardContent className="p-0">
+                <ICPDefinition
+                  onSaveConfiguration={handleSaveConfiguration}
+                  onPreview={handlePreviewClick}
+                  estimatedLeads={estimatedLeads}
+                />
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

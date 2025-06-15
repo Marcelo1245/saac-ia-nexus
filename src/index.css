@@ -133,6 +133,31 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  .premium-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .premium-card {
+    background: linear-gradient(145deg, #f8fafc 0%, #e2e8f0 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .premium-text {
+    color: #334155;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    line-height: 1.6;
+  }
+  
+  .premium-title {
+    color: #1e293b;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+  }
 }
 
 /* Smooth scrolling behavior */
@@ -146,14 +171,14 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #121212;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00A8FF;
+  background: #94a3b8;
 }
