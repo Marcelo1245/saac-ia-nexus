@@ -50,14 +50,6 @@ const usMajorCities = [
   "Denver", "Washington", "Boston", "Detroit", "Nashville", "Memphis", "Portland"
 ];
 
-const metropolitanAreas = [
-  "Grande São Paulo", "Grande Rio de Janeiro", "Grande Belo Horizonte", "Grande Brasília",
-  "Grande Salvador", "Grande Fortaleza", "Grande Recife", "Grande Porto Alegre",
-  "Grande Curitiba", "Região do ABC Paulista", "New York Metropolitan Area", 
-  "Los Angeles Metro", "Chicago Metro", "San Francisco Bay Area", "Washington Metro",
-  "Greater London", "Greater Paris", "Greater Toronto Area"
-];
-
 const LocationSection: React.FC<LocationSectionProps> = ({
   filters,
   updateFilter,
@@ -96,10 +88,6 @@ const LocationSection: React.FC<LocationSectionProps> = ({
 
   const handleStateSelect = (state: string) => {
     toggleFilterValue('states', state);
-  };
-
-  const handleMetroSelect = (metro: string) => {
-    toggleFilterValue('customTags', metro);
   };
 
   const filteredCities = getCitiesForCountry(selectedCountry).filter(city =>
@@ -180,23 +168,6 @@ const LocationSection: React.FC<LocationSectionProps> = ({
               )}
             </div>
           )}
-        </div>
-
-        <div>
-          <Label className="text-base font-medium">Área Metropolitana</Label>
-          <p className="text-sm text-gray-600 mb-2">Grandes regiões metropolitanas</p>
-          <Select onValueChange={handleMetroSelect}>
-            <SelectTrigger>
-              <SelectValue placeholder="Selecione uma área metropolitana..." />
-            </SelectTrigger>
-            <SelectContent>
-              {metropolitanAreas.map(area => (
-                <SelectItem key={area} value={area}>
-                  {area}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </div>
       </div>
     </div>

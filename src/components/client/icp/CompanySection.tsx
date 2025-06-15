@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+
+import React from 'react';
 import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ProspectingFilters } from '@/types/prospecting';
 
@@ -18,6 +18,16 @@ const companySizes = [
   { id: "201-500", label: "201-500 funcionários" },
   { id: "501-1000", label: "501-1.000 funcionários" },
   { id: "1001+", label: "1.001+ funcionários" }
+];
+
+const companyTypes = [
+  "Empresa pública",
+  "Empresa privada", 
+  "Instituição educacional",
+  "Parceria",
+  "Trabalhadores por conta própria",
+  "Próprio",
+  "Agência governamental"
 ];
 
 const industries = [
@@ -53,40 +63,14 @@ const industries = [
   "Equipamentos Industriais"
 ];
 
-const majorCompanies = [
-  // Tech Companies
-  "Microsoft", "Google", "Amazon", "Apple", "Meta", "Netflix", "Spotify", "Salesforce",
-  "IBM", "Oracle", "SAP", "Adobe", "Uber", "Airbnb", "Twitter", "LinkedIn",
-  
-  // Brazilian Companies
-  "Vale", "Petrobras", "Itaú Unibanco", "Banco do Brasil", "Bradesco", "Magazine Luiza",
-  "Ambev", "JBS", "WEG", "Embraer", "Natura", "Localiza", "B3", "StoneCo",
-  "Nubank", "iFood", "Mercado Livre", "Movile", "Stone", "PagSeguro",
-  
-  // Financial Services
-  "JPMorgan Chase", "Bank of America", "Wells Fargo", "Goldman Sachs", "Morgan Stanley",
-  "Citigroup", "American Express", "Visa", "Mastercard", "PayPal",
-  
-  // Other Major Corps
-  "Johnson & Johnson", "Procter & Gamble", "Coca-Cola", "PepsiCo", "Nestlé",
-  "Unilever", "Nike", "Adidas", "McDonald's", "Starbucks", "Walmart", "Target"
-];
-
 const CompanySection: React.FC<CompanySectionProps> = ({
   filters,
   updateFilter,
   toggleFilterValue,
   isValueSelected
 }) => {
-  const [companySearch, setCompanySearch] = useState<string>("");
-
-  const filteredCompanies = majorCompanies.filter(company =>
-    company.toLowerCase().includes(companySearch.toLowerCase())
-  );
-
-  const handleCompanySelect = (company: string) => {
-    toggleFilterValue('customTags', `company:${company}`);
-    setCompanySearch("");
+  const handleCompanyTypeSelect = (type: string) => {
+    toggleFilterValue('customTags', `companyType:${type}`);
   };
 
   const handleSizeSelect = (size: string) => {
@@ -101,31 +85,20 @@ const CompanySection: React.FC<CompanySectionProps> = ({
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="space-y-4">
         <div>
-          <Label className="text-base font-medium">Nome da Empresa</Label>
-          <p className="text-sm text-gray-600 mb-2">Digite nomes de empresas específicas</p>
-          <Input
-            placeholder="Ex: Microsoft, Google, Nubank..."
-            value={companySearch}
-            onChange={(e) => setCompanySearch(e.target.value)}
-          />
-          {companySearch && (
-            <div className="mt-2 max-h-40 overflow-y-auto border rounded-md bg-white">
-              {filteredCompanies.slice(0, 10).map(company => (
-                <div 
-                  key={company}
-                  className="p-2 hover:bg-gray-100 cursor-pointer text-sm border-b last:border-b-0"
-                  onClick={() => handleCompanySelect(company)}
-                >
-                  {company}
-                </div>
+          <Label className="text-base font-medium">Tipo de Empresa</Label>
+          <p className="text-sm text-gray-600 mb-2">Selecione o tipo de organização</p>
+          <Select onValueChange={handleCompanyTypeSelect}>
+            <SelectTrigger>
+              <SelectValue placeholder="Selecione o tipo..." />
+            </SelectTrigger>
+            <SelectContent>
+              {companyTypes.map(type => (
+                <SelectItem key={type} value={type}>
+                  {type}
+                </SelectItem>
               ))}
-              {filteredCompanies.length === 0 && (
-                <div className="p-2 text-sm text-gray-500">
-                  Nenhuma empresa encontrada para "{companySearch}"
-                </div>
-              )}
-            </div>
-          )}
+            </SelectContent>
+          </Select>
         </div>
 
         <div>

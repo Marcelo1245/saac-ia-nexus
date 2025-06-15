@@ -125,28 +125,18 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
     }
   };
 
-  const handleSaveConfiguration = () => {
+  const handleSendICP = () => {
     const selectedFilters = getAllSelectedFilters();
     if (selectedFilters.length === 0) {
       toast.error("Selecione pelo menos um filtro para definir seu ICP.");
       return;
     }
     onSaveConfiguration?.();
-    toast.success("Configuração do ICP salva com sucesso!");
-  };
-
-  const handlePreview = () => {
-    const selectedFilters = getAllSelectedFilters();
-    if (selectedFilters.length === 0) {
-      toast.error("Selecione filtros para visualizar os resultados.");
-      return;
-    }
-    onPreview?.();
-    toast.success("Gerando pré-visualização dos leads...");
+    toast.success("ICP enviado com sucesso!");
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pt-8">
       <div className="text-center">
         <h1 className="text-3xl font-bold text-gray-900 mb-2">
           Defina o ICP (Perfil de Cliente Ideal) para segmentação de leads
@@ -245,11 +235,11 @@ const ICPDefinition: React.FC<ICPDefinitionProps> = ({
         </div>
         
         <div className="flex gap-3">
-          <Button variant="outline" onClick={handleSaveConfiguration}>
+          <Button variant="outline" onClick={handleSendICP}>
             Salvar Configuração
           </Button>
-          <Button onClick={handlePreview} className="bg-blue-600 hover:bg-blue-700">
-            Pré-visualizar
+          <Button onClick={handleSendICP} className="bg-blue-600 hover:bg-blue-700">
+            Enviar ICP
           </Button>
         </div>
       </div>
