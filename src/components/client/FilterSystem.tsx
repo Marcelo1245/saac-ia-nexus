@@ -5,18 +5,15 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Slider } from "@/components/ui/slider";
 import { Search, Download } from 'lucide-react';
 import { ProspectingFilters as ProspectingFiltersType } from '@/types/prospecting';
-import FilterGroup from './FilterGroup';
-import FilterChips from './FilterChips';
 import FilterTabs from './FilterTabs';
 import LocationFilters from './filters/LocationFilters';
 import CompanyFilters from './filters/CompanyFilters';
 import PeopleFilters from './filters/PeopleFilters';
 import EngagementFilters from './filters/EngagementFilters';
 import CustomFilters from './filters/CustomFilters';
+import LinkedInExport from './LinkedInExport';
 
 export interface FilterSystemProps {
   onFiltersChange: (filters: Partial<ProspectingFiltersType>) => void;
@@ -60,8 +57,7 @@ const FilterSystem: React.FC<FilterSystemProps> = ({
     // Count filters per category
     const locationCount = (filters.countries?.length || 0) + 
                           (filters.states?.length || 0) + 
-                          (filters.zipCodes?.length || 0) + 
-                          (filters.radius ? 1 : 0);
+                          (filters.cities?.length || 0);
     
     const companyCount = (filters.industries?.length || 0) + 
                          (filters.companySizes?.length || 0) + 
@@ -131,7 +127,7 @@ const FilterSystem: React.FC<FilterSystemProps> = ({
             id="campaignName"
             value={campaignName}
             onChange={(e) => setCampaignName(e.target.value)}
-            placeholder="Ex: Prospecção Q2 2024"
+            placeholder="Ex: Prospecção LinkedIn Q2 2024"
             className="mt-1"
           />
         </div>
@@ -148,10 +144,43 @@ const FilterSystem: React.FC<FilterSystemProps> = ({
           </div>
         </div>
         
-        {/* Mobile accordion view would go here - simplified for now */}
         <Accordion type="single" collapsible>
-          {/* Content would go here */}
+          <AccordionItem value="location">
+            <AccordionTrigger>Localização ({selectedFiltersCount.location})</AccordionTrigger>
+            <AccordionContent>
+              <LocationFilters 
+                filters={filters} 
+                isValueSelected={isValueSelected} 
+                toggleFilterValue={toggleFilterValue} 
+                updateFilter={updateFilter}
+              />
+            </AccordionContent>
+          </AccordionItem>
+          
+          <AccordionItem value="company">
+            <AccordionTrigger>Empresa ({selectedFiltersCount.company})</AccordionTrigger>
+            <AccordionContent>
+              <CompanyFilters 
+                filters={filters} 
+                isValueSelected={isValueSelected} 
+                toggleFilterValue={toggleFilterValue}
+              />
+            </AccordionContent>
+          </AccordionItem>
+          
+          <AccordionItem value="people">
+            <AccordionTrigger>Pessoas ({selectedFiltersCount.people})</AccordionTrigger>
+            <AccordionContent>
+              <PeopleFilters 
+                filters={filters} 
+                isValueSelected={isValueSelected} 
+                toggleFilterValue={toggleFilterValue}
+              />
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
+        
+        <LinkedInExport filters={filters} campaignName={campaignName} />
         
         <div className="mt-6 flex justify-between">
           <Button variant="outline" className="gap-2" onClick={onExportFilters}>
@@ -177,7 +206,7 @@ const FilterSystem: React.FC<FilterSystemProps> = ({
             id="campaignName"
             value={campaignName}
             onChange={(e) => setCampaignName(e.target.value)}
-            placeholder="Ex: Prospecção Q2 2024"
+            placeholder="Ex: Prospecção LinkedIn Q2 2024"
             className="mt-1"
           />
         </div>
@@ -247,6 +276,8 @@ const FilterSystem: React.FC<FilterSystemProps> = ({
           />
         </TabsContent>
       </Tabs>
+      
+      <LinkedInExport filters={filters} campaignName={campaignName} />
       
       <div className="flex justify-between">
         {onSaveFilters && (
