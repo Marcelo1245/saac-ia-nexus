@@ -36,8 +36,14 @@ class AirtableService {
     company?: string;
     message?: string;
   }): Promise<boolean> {
+    console.log('🚀 Iniciando envio para Airtable...');
+    console.log('📝 Dados recebidos:', data);
+    console.log('🔑 API Key (primeiros 10 chars):', this.apiKey.substring(0, 10) + '...');
+    console.log('📊 Base ID:', this.baseId);
+    console.log('📋 Table ID:', this.tableId);
+
     try {
-      const record: AirtableRecord = {
+      const record = {
         fields: {
           'Nome completo': data.name,
           'E-mail corporativo': data.email,
@@ -48,7 +54,12 @@ class AirtableService {
         },
       };
 
-      const response = await fetch(`${this.baseUrl}/${this.baseId}/${this.tableId}`, {
+      console.log('📦 Record que será enviado:', JSON.stringify(record, null, 2));
+
+      const url = `${this.baseUrl}/${this.baseId}/${this.tableId}`;
+      console.log('🌐 URL da requisição:', url);
+
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${this.apiKey}`,
@@ -57,23 +68,40 @@ class AirtableService {
         body: JSON.stringify(record),
       });
 
+      console.log('📡 Status da resposta:', response.status);
+      console.log('📡 Headers da resposta:', Object.fromEntries(response.headers.entries()));
+
+      const responseText = await response.text();
+      console.log('📄 Resposta completa:', responseText);
+
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Airtable API Error:', errorData);
-        throw new Error(`Airtable API Error: ${response.status}`);
+        let errorData;
+        try {
+          errorData = JSON.parse(responseText);
+        } catch (e) {
+          errorData = { message: responseText };
+        }
+        
+        console.error('❌ Erro da API Airtable:', errorData);
+        console.error('❌ Status:', response.status);
+        console.error('❌ Status Text:', response.statusText);
+        
+        throw new Error(`Airtable API Error: ${response.status} - ${JSON.stringify(errorData)}`);
       }
 
-      const result = await response.json();
-      console.log('Registro criado no Airtable:', result);
+      const result = JSON.parse(responseText);
+      console.log('✅ Registro criado com sucesso:', result);
       return true;
     } catch (error) {
-      console.error('Erro ao criar registro no Airtable:', error);
+      console.error('💥 Erro completo ao criar registro:', error);
+      console.error('💥 Stack trace:', error instanceof Error ? error.stack : 'No stack trace');
       throw error;
     }
   }
 
   async testConnection(): Promise<boolean> {
     try {
+      console.log('🔍 Testando conexão com Airtable...');
       const response = await fetch(`${this.baseUrl}/${this.baseId}/${this.tableId}?maxRecords=1`, {
         method: 'GET',
         headers: {
@@ -82,9 +110,13 @@ class AirtableService {
         },
       });
 
+      console.log('🔍 Status do teste de conexão:', response.status);
+      const testResponse = await response.text();
+      console.log('🔍 Resposta do teste:', testResponse);
+
       return response.ok;
     } catch (error) {
-      console.error('Erro ao testar conexão com Airtable:', error);
+      console.error('❌ Erro ao testar conexão:', error);
       return false;
     }
   }
