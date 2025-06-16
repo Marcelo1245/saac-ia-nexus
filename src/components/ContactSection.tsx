@@ -1,18 +1,16 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MessageSquare, Calendar, Settings } from 'lucide-react';
+import { Mail, Phone, MessageSquare, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
-import AirtableConfig from '@/components/AirtableConfig';
 import AirtableService from '@/services/airtableService';
 
 const ContactSection: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [showVoiceflowChat, setShowVoiceflowChat] = useState(false);
-  const [showAirtableConfig, setShowAirtableConfig] = useState(false);
-  const [airtableConfig, setAirtableConfig] = useState<any>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Form state
@@ -23,6 +21,13 @@ const ContactSection: React.FC = () => {
     phone: '',
     message: '',
   });
+
+  // Initialize Airtable service with provided credentials
+  const airtableService = new AirtableService(
+    'patMaLVO52wxu3qmm.4023206ec71de3dd23d0df6d61576dba46229b2c54e477cd88b451e11e169704',
+    'app70pK6jWQT7UfRw',
+    'tbl6oIUsbtTpOAWZR'
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -116,28 +121,18 @@ const ContactSection: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      // Enviar para Airtable se configurado
-      if (airtableConfig) {
-        const airtableService = new AirtableService(
-          airtableConfig.apiKey,
-          airtableConfig.baseId,
-          airtableConfig.tableId
-        );
+      // Send data to Airtable automatically
+      await airtableService.createRecord({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        message: formData.message,
+      });
 
-        await airtableService.createRecord({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          company: formData.company,
-          message: formData.message,
-        });
+      toast.success('Mensagem enviada com sucesso!');
 
-        toast.success('Mensagem enviada com sucesso! Dados salvos no Airtable.');
-      } else {
-        toast.success('Mensagem enviada com sucesso!');
-      }
-
-      // Limpar formulário
+      // Clear form
       setFormData({
         name: '',
         email: '',
@@ -154,11 +149,6 @@ const ContactSection: React.FC = () => {
     }
   };
 
-  const handleAirtableConfigSaved = (config: any) => {
-    setAirtableConfig(config);
-    setShowAirtableConfig(false);
-  };
-
   return (
     <section
       id="contact"
@@ -173,25 +163,14 @@ const ContactSection: React.FC = () => {
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-4 mb-6">
-            <h2 
-              className={`text-3xl md:text-4xl font-bold transition-all duration-700 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
-            >
-              <span className="text-white">Entre em </span>
-              <span className="text-gradient-blue">Contato</span>
-            </h2>
-            
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowAirtableConfig(!showAirtableConfig)}
-              className="text-gray-400 hover:text-white"
-            >
-              <Settings className="h-4 w-4" />
-            </Button>
-          </div>
+          <h2 
+            className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-700 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <span className="text-white">Entre em </span>
+            <span className="text-gradient-blue">Contato</span>
+          </h2>
           
           <p 
             className={`text-gray-300 text-lg leading-relaxed transition-all duration-700 delay-300 ${
@@ -201,10 +180,6 @@ const ContactSection: React.FC = () => {
             Estamos prontos para revolucionar sua estratégia de prospecção. Fale com um especialista hoje mesmo.
           </p>
         </div>
-        
-        {showAirtableConfig && (
-          <AirtableConfig onConfigSaved={handleAirtableConfigSaved} />
-        )}
         
         {showVoiceflowChat ? (
           <div className="glass-card rounded-xl p-8 max-w-4xl mx-auto">
@@ -235,9 +210,6 @@ const ContactSection: React.FC = () => {
             >
               <h3 className="text-xl font-semibold text-white mb-6">
                 Solicite uma demonstração
-                {airtableConfig && (
-                  <span className="ml-2 text-sm text-green-400">● Airtable conectado</span>
-                )}
               </h3>
               
               <Button 
