@@ -1,12 +1,12 @@
 
 interface AirtableRecord {
   fields: {
-    Name: string;
-    Email: string;
-    Phone?: string;
-    Company?: string;
-    Message?: string;
-    'Contact Date': string;
+    'Nome completo': string;
+    'E-mail corporativo': string;
+    'Telefone'?: string;
+    'Empresa'?: string;
+    'Mensagem'?: string;
+    'Data de Contato': string;
   };
 }
 
@@ -39,12 +39,12 @@ class AirtableService {
     try {
       const record: AirtableRecord = {
         fields: {
-          Name: data.name,
-          Email: data.email,
-          Phone: data.phone || '',
-          Company: data.company || '',
-          Message: data.message || '',
-          'Contact Date': new Date().toISOString(),
+          'Nome completo': data.name,
+          'E-mail corporativo': data.email,
+          'Telefone': data.phone || '',
+          'Empresa': data.company || '',
+          'Mensagem': data.message || '',
+          'Data de Contato': new Date().toISOString(),
         },
       };
 
