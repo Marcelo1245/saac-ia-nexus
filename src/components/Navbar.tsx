@@ -73,6 +73,9 @@ const Navbar: React.FC = () => {
           <button onClick={() => scrollToSection('how-it-works')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Como Funciona
           </button>
+          <button onClick={() => scrollToSection('ecosystem')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
+            Ecossistema
+          </button>
           <button onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Resultados
           </button>
@@ -119,6 +122,9 @@ const Navbar: React.FC = () => {
           </button>
           <button onClick={() => scrollToSection('how-it-works')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
             Como Funciona
+          </button>
+          <button onClick={() => scrollToSection('ecosystem')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
+            Ecossistema
           </button>
           <button onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
             Resultados

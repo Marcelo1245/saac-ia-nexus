@@ -85,8 +85,7 @@ const ResultsSection: React.FC = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            <span className="text-white">Resultados </span>
-            <span className="text-gradient-blue">Comprovados</span>
+            <span className="text-gradient-blue">Resultados</span>
           </h2>
           
           <p 
