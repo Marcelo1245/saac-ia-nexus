@@ -144,8 +144,8 @@ const EcosystemSection: React.FC = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            Uma plataforma completa de inteligência artificial aplicada à performance comercial. 
-            Tecnologia de ponta que transforma seu processo de vendas em uma máquina de resultados.
+            Uma consultoria completa de tecnologia aplicada à performance comercial. 
+            Soluções que transformam seu processo de vendas em uma máquina de resultados.
           </p>
         </div>
 

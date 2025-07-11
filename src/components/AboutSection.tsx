@@ -56,7 +56,7 @@ const AboutSection: React.FC = () => {
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            Somos uma empresa inovadora que desenvolveu um sistema revolucionário de inteligência artificial focado na prospecção de leads e automação de vendas. Nossa missão é transformar o processo comercial das empresas, eliminando tarefas repetitivas e potencializando resultados.
+            Somos uma consultoria completa de tecnologia aplicada à performance comercial. Nossa missão é transformar o processo comercial das empresas e empreendedores, eliminando tarefas repetitivas, otimizando custos e potencializando resultados.
           </p>
         </div>
         
