@@ -106,9 +106,9 @@ const HeroSection: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-6 md:space-y-8 parallax" data-speed="0.1">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in">
-                <span className="text-white">Hub de soluções inteligentes</span>
+                <span className="text-white">Otimize seu fluxo comercial,</span>
                 <br />
-                <span className="text-gradient-blue">segmentadas à performance comercial</span>
+                <span className="text-gradient-blue">gerando eficiência real, comece agora</span>
               </h1>
               
               <p className="text-gray-300 text-lg md:text-xl animate-fade-in opacity-0" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
