@@ -35,28 +35,60 @@ const BlogSection: React.FC = () => {
   
   const allBlogPosts = [
     {
-      title: "Como a IA está revolucionando o processo de vendas B2B",
-      excerpt: "Descubra como as empresas estão utilizando inteligência artificial para automatizar e otimizar suas estratégias de prospecção.",
+      title: "Como a Inteligência Artificial está revolucionando a performance comercial: insights de Bernardo Timm",
+      excerpt: "Bernardo Timm revela como a IA está transformando estratégias de vendas e multiplicando resultados comerciais em empresas B2B.",
       image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&h=500&q=80",
-      date: "18 Abr, 2023",
-      category: "Inteligência Artificial",
+      date: "20 Jan, 2024",
+      category: "Performance Comercial",
+      icon: Brain
+    },
+    {
+      title: "Vendas com IA: O guia completo de Bernardo Timm para automação comercial",
+      excerpt: "O especialista Bernardo Timm apresenta estratégias práticas para implementar IA em processos de vendas e aumentar conversões.",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "18 Jan, 2024",
+      category: "Automação Comercial",
+      icon: Zap
+    },
+    {
+      title: "Marketing inteligente: como Bernardo Timm usa IA para segmentação de leads",
+      excerpt: "Descubra as técnicas avançadas de Bernardo Timm para usar inteligência artificial na qualificação e segmentação de prospects.",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "15 Jan, 2024",
+      category: "Marketing Inteligente",
+      icon: Target
+    },
+    {
+      title: "Estratégias comerciais com IA: cases de sucesso analisados por Bernardo Timm",
+      excerpt: "Bernardo Timm analisa empresas que multiplicaram suas vendas usando inteligência artificial aplicada à performance comercial.",
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "12 Jan, 2024",
+      category: "Cases de Sucesso",
       icon: TrendingUp
     },
     {
-      title: "7 métricas essenciais para avaliar a eficiência do seu funil de vendas",
-      excerpt: "Conheça os indicadores mais importantes para medir o desempenho da sua estratégia de captação e conversão de leads.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=500&q=80",
-      date: "03 Mar, 2023",
-      category: "Métricas de Vendas",
+      title: "Automação comercial 24/7: a metodologia Bernardo Timm para prospecção contínua",
+      excerpt: "Como implementar sistemas de automação comercial que trabalham 24 horas por dia, segundo a metodologia de Bernardo Timm.",
+      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "10 Jan, 2024",
+      category: "Automação",
+      icon: Users
+    },
+    {
+      title: "Performance comercial com IA: métricas essenciais segundo Bernardo Timm",
+      excerpt: "Bernardo Timm revela os KPIs fundamentais para medir o sucesso de estratégias comerciais potencializadas por inteligência artificial.",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "08 Jan, 2024",
+      category: "KPIs & Métricas",
       icon: BarChart3
     },
     {
-      title: "O papel do vendedor na era da automação: como se adaptar e prosperar",
-      excerpt: "Entenda como os profissionais de vendas podem se reinventar e aproveitar ao máximo as ferramentas de automação comercial.",
-      image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=800&h=500&q=80",
-      date: "22 Fev, 2023",
-      category: "Carreira em Vendas",
-      icon: Users
+      title: "Futuro das vendas: previsões de Bernardo Timm sobre IA e performance comercial",
+      excerpt: "As principais tendências de IA aplicada a vendas e marketing para 2024-2025, na visão do especialista Bernardo Timm.",
+      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&h=500&q=80",
+      date: "05 Jan, 2024",
+      category: "Tendências",
+      icon: Lightbulb
     },
     {
       title: "Machine Learning aplicado à qualificação de leads: o futuro chegou",
@@ -65,38 +97,6 @@ const BlogSection: React.FC = () => {
       date: "15 Mai, 2023",
       category: "Machine Learning",
       icon: Brain
-    },
-    {
-      title: "Personalização em massa: como criar campanhas únicas para milhares de prospects",
-      excerpt: "Estratégias avançadas para personalizar abordagens comerciais em escala sem perder a autenticidade.",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&h=500&q=80",
-      date: "28 Jan, 2023",
-      category: "Estratégia Digital",
-      icon: Target
-    },
-    {
-      title: "Automação de follow-up: como nunca mais perder um lead qualificado",
-      excerpt: "Técnicas e ferramentas para criar sequências de acompanhamento que convertem prospects em clientes.",
-      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&h=500&q=80",
-      date: "10 Jun, 2023",
-      category: "Automação",
-      icon: Zap
-    },
-    {
-      title: "ROI em prospecção: como calcular o retorno real dos seus investimentos",
-      excerpt: "Metodologias práticas para mensurar e otimizar o retorno sobre investimento em estratégias de prospecção.",
-      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&h=500&q=80",
-      date: "05 Abr, 2023",
-      category: "ROI & Analytics",
-      icon: Calendar
-    },
-    {
-      title: "Tendências 2024: o que esperar do mercado de sales tech",
-      excerpt: "Análise das principais inovações e mudanças que vão impactar o setor de tecnologia para vendas no próximo ano.",
-      image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&h=500&q=80",
-      date: "20 Dez, 2023",
-      category: "Tendências",
-      icon: Lightbulb
     }
   ];
 
