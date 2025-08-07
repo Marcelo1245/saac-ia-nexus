@@ -76,9 +76,6 @@ const Navbar: React.FC = () => {
           <button onClick={() => scrollToSection('ecosystem')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
             Ecossistema
           </button>
-          <button onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue cursor-pointer transition-colors">
-            Resultados
-          </button>
           <Link to="/blog" className="text-gray-300 hover:text-saac-blue transition-colors">
             Blog
           </Link>
@@ -125,9 +122,6 @@ const Navbar: React.FC = () => {
           </button>
           <button onClick={() => scrollToSection('ecosystem')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
             Ecossistema
-          </button>
-          <button onClick={() => scrollToSection('results')} className="text-gray-300 hover:text-saac-blue py-2 cursor-pointer text-left">
-            Resultados
           </button>
           <Link to="/blog" className="text-gray-300 hover:text-saac-blue py-2">
             Blog

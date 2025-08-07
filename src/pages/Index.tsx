@@ -7,7 +7,7 @@ import AboutSection from "@/components/AboutSection";
 import SolutionSection from "@/components/SolutionSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import EcosystemSection from "@/components/EcosystemSection";
-import ResultsSection from "@/components/ResultsSection";
+
 import BlogSection from "@/components/BlogSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -30,7 +30,7 @@ const Index = () => {
         <SolutionSection />
         <HowItWorksSection />
         <EcosystemSection />
-        <ResultsSection />
+        
         <BlogSection />
         <ContactSection />
       </main>
